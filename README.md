@@ -17,9 +17,12 @@ public class Usuario
     private String password;
     private String typeUser; /* Aqui va un ENUM para seleccionar el tipo de usario Cliente o Profesional, con esto se habilitaran unos campos*/
     private Person person;
-    private List<Service> services;
     private Account account;
+    private List<Service> services;
     private String idJob;/*La cedula profesional del profesional*/ 
+    private Boolean idActive;/*Indica si el usuario tiene su perfil activo */
+    private Double coordX;
+    private Double coordY;
 }
 ```
 
