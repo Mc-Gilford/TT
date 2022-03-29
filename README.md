@@ -179,6 +179,7 @@ public class Professional extends User
     private List<Service> services;
     private String idJob;/*La cedula profesional del profesional*/
     private Float score;
+    private List<Integer> qualification; /*Calificaciones por usuarios*/
 }
 ```
 
@@ -240,7 +241,9 @@ public class Professional extends User
         }
     ],
     "idJob":"xxxxxxxxxx",
-    "score":9.8
+    "score":9.8,
+    "qualification":[4,5,6
+    ]
 }
 ```
 
