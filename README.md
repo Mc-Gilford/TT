@@ -67,6 +67,8 @@ public class User
 }
 ```
 
+![User](https://github.com/McGilfordJose/TT/blob/main/Images/user.png)
+
 ## Cliente
 La clase cliente hereda las caracteristicas de **User**, en cambio tendra un campo adicional a su clase padre, la cual sera una lista donde puede guardar a los profesionales que mas le gustaron.
 ``` java
@@ -171,6 +173,8 @@ public class Client extends User
 ```
 
 
+![Client](https://github.com/McGilfordJose/TT/blob/main/Images/client.png)
+
 ## Profesional
 Esta clase muy similar a su clase hermana Cliente agrega nuevos atributos para su funcionamiento de esta como una lista de sus servicios, un campo para la cedula profesional y su puntaje para el sistema de calificaciones.
 ``` java
@@ -247,6 +251,9 @@ public class Professional extends User
 }
 ```
 
+
+![User](https://github.com/McGilfordJose/TT/blob/main/Images/professional.png)
+
 ## Persona
 La entidad **Person** es donde tendra la mayor de la parte de la informacion personal, como el nombre, apellido paterno, apellido materno, telefono, domicilio y archivos personales.
 
@@ -291,6 +298,8 @@ public class Person
 }
 ```
 
+
+![Person](https://github.com/McGilfordJose/TT/blob/main/Images/person.png)
 
 ## Direccion
 La entidad de **Address** es donde contendra la mayor parte de la informacion de la direccion del usuario, como pais, estado, ciudad, colonia, calle, codigo postal, numero.
