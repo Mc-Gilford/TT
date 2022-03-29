@@ -67,7 +67,7 @@ public class User
 }
 ```
 
-![User](https://github.com/McGilfordJose/TT/blob/main/Images/user.png?style=centerme)
+![User](https://github.com/McGilfordJose/TT/blob/main/Images/user.png#center)
 
 ## Cliente
 La clase cliente hereda las caracteristicas de **User**, en cambio tendra un campo adicional a su clase padre, la cual sera una lista donde puede guardar a los profesionales que mas le gustaron.
@@ -173,7 +173,7 @@ public class Client extends User
 ```
 
 
-![Client](https://github.com/McGilfordJose/TT/blob/main/Images/client.png?style=centerme)
+![Client](https://github.com/McGilfordJose/TT/blob/main/Images/client.png#center)
 
 ## Profesional
 Esta clase muy similar a su clase hermana Cliente agrega nuevos atributos para su funcionamiento de esta como una lista de sus servicios, un campo para la cedula profesional y su puntaje para el sistema de calificaciones.
@@ -252,7 +252,7 @@ public class Professional extends User
 ```
 
 
-![User](https://github.com/McGilfordJose/TT/blob/main/Images/professional.png?style=centerme)
+![User](https://github.com/McGilfordJose/TT/blob/main/Images/professional.png#center)
 
 ## Persona
 La entidad **Person** es donde tendra la mayor de la parte de la informacion personal, como el nombre, apellido paterno, apellido materno, telefono, domicilio y archivos personales.
@@ -299,7 +299,7 @@ public class Person
 ```
 
 
-![Person](https://github.com/McGilfordJose/TT/blob/main/Images/person.png?style=centerme)
+![Person](https://github.com/McGilfordJose/TT/blob/main/Images/person.png#center)
 
 ## Direccion
 La entidad de **Address** es donde contendra la mayor parte de la informacion de la direccion del usuario, como pais, estado, ciudad, colonia, calle, codigo postal, numero.
@@ -333,7 +333,7 @@ public class Address
 ```
 
 
-![Address](https://github.com/McGilfordJose/TT/blob/main/Images/address.png?style=centerme)
+![Address](https://github.com/McGilfordJose/TT/blob/main/Images/address.png#center)
 
 ## Cuenta
 Esta entidad **Account** representa los datos del numero de cuenta bancaria, como el numero de la tarjeta, el tipo de tarjeta, numero de cuenta y la cantidad que se le depositara a su cuenta.
@@ -359,7 +359,7 @@ private class Account
 ```
 
 
-![Account](https://github.com/McGilfordJose/TT/blob/main/Images/account.png?style=centerme)
+![Account](https://github.com/McGilfordJose/TT/blob/main/Images/account.png#center)
 
 ## Servicio 
 La entidad **Service** esta representa por el nombre del tipo de servicio, el precio del servicio y los detalles de este.
@@ -387,4 +387,4 @@ private class Service
 ```
 
 
-![Service](https://github.com/McGilfordJose/TT/blob/main/Images/service.png?style=centerme)
+![Service](https://github.com/McGilfordJose/TT/blob/main/Images/service.png#center)
