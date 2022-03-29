@@ -332,6 +332,9 @@ public class Address
 }
 ```
 
+
+![Address](https://github.com/McGilfordJose/TT/blob/main/Images/address.png)
+
 ## Cuenta
 Esta entidad **Account** representa los datos del numero de cuenta bancaria, como el numero de la tarjeta, el tipo de tarjeta, numero de cuenta y la cantidad que se le depositara a su cuenta.
 
@@ -354,6 +357,9 @@ private class Account
     "amount": 0.00
 }
 ```
+
+
+![Account](https://github.com/McGilfordJose/TT/blob/main/Images/account.png)
 
 ## Servicio 
 La entidad **Service** esta representa por el nombre del tipo de servicio, el precio del servicio y los detalles de este.
@@ -379,3 +385,6 @@ private class Service
     "time": "1hr"
 }
 ```
+
+
+![Service](https://github.com/McGilfordJose/TT/blob/main/Images/service.png)
