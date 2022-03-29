@@ -317,7 +317,7 @@ public class Address
     private Integer number;
 }
 ```
-### Direccion
+### JSON
 
 ``` json
 {
