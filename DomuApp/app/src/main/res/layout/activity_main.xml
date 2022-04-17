@@ -22,11 +22,13 @@
         android:layout_marginEnd="24dp"
         android:hint="@string/prompt_email"
         android:inputType="textEmailAddress"
+        android:minHeight="48dp"
         android:selectAllOnFocus="true"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/password"
@@ -39,11 +41,13 @@
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
+        android:minHeight="48dp"
         android:selectAllOnFocus="true"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+        app:layout_constraintTop_toBottomOf="@+id/username"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/login"
@@ -55,11 +59,11 @@
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="64dp"
         android:enabled="false"
-        android:text="Entrar"
+        android:text="@string/login"
         android:textColor="@color/white"
         android:textColorHint="#000000"
         app:backgroundTint="#F49225"
-        app:cornerRadius="90px"
+        app:cornerRadius="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -68,17 +72,17 @@
         app:layout_constraintVertical_bias="0.075" />
 
     <Button
-        android:id="@+id/login2"
+        android:id="@+id/register"
         android:layout_width="188dp"
         android:layout_height="74dp"
         android:layout_gravity="start"
         android:layout_marginTop="24dp"
         android:enabled="false"
-        android:text="Registrar"
+        android:text="@string/register"
         android:textColor="@color/white"
         android:textColorHint="#000000"
         app:backgroundTint="#F49225"
-        app:cornerRadius="90px"
+        app:cornerRadius="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
