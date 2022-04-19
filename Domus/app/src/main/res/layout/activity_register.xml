@@ -11,31 +11,36 @@
         android:layout_width="190dp"
         android:layout_height="197dp"
         android:layout_marginTop="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/name"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.053"
         app:srcCompat="@drawable/logo_api"
         tools:layout_editor_absoluteX="110dp" />
 
     <ScrollView
-        android:layout_width="22dp"
-        android:layout_height="729dp"
-        tools:layout_editor_absoluteX="387dp"
-        tools:layout_editor_absoluteY="2dp">
+        android:id="@+id/scrollView2"
+        android:layout_width="406dp"
+        android:layout_height="728dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="1dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <EditText
                 android:id="@+id/name"
-                android:layout_width="0dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="272dp"
                 android:layout_marginEnd="24dp"
                 android:hint="Nombre"
                 android:inputType="text"
+                android:minHeight="48dp"
                 android:selectAllOnFocus="true"
                 android:textColor="#FF7C7C7C"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -45,13 +50,14 @@
 
             <EditText
                 android:id="@+id/lastname"
-                android:layout_width="0dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
                 android:hint="Apellido Paterno"
                 android:inputType="text"
+                android:minHeight="48dp"
                 android:selectAllOnFocus="true"
                 android:textColor="#FF7C7C7C"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -61,12 +67,13 @@
 
             <EditText
                 android:id="@+id/secondname"
-                android:layout_width="0dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
                 android:hint="Apellido Materno"
+                android:minHeight="48dp"
                 android:inputType="text"
                 android:selectAllOnFocus="true"
                 android:textColor="#FF7C7C7C"
@@ -74,14 +81,16 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lastname" />
+
             <EditText
                 android:id="@+id/birthday"
-                android:layout_width="0dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
                 android:hint="Fecha Nacimiento"
+                android:minHeight="48dp"
                 android:inputType="text"
                 android:selectAllOnFocus="true"
                 android:textColor="#FF7C7C7C"
@@ -89,126 +98,180 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/secondname" />
+
             <EditText
                 android:id="@+id/phone"
-                android:layout_width="0dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
                 android:hint="Telefono"
                 android:inputType="text"
+                android:minHeight="48dp"
                 android:selectAllOnFocus="true"
                 android:textColor="#FF7C7C7C"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/birthday" />
+
             <EditText
                 android:id="@+id/country"
-                android:layout_width="0dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
                 android:hint="Pais"
                 android:inputType="text"
+                android:minHeight="48dp"
                 android:selectAllOnFocus="true"
                 android:textColor="#FF7C7C7C"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/phone" />
+
             <EditText
                 android:id="@+id/state"
-                android:layout_width="0dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
                 android:hint="Estado"
                 android:inputType="text"
+                android:minHeight="48dp"
                 android:selectAllOnFocus="true"
                 android:textColor="#FF7C7C7C"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/country" />
+
             <EditText
                 android:id="@+id/city"
-                android:layout_width="0dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
                 android:hint="Ciudad"
                 android:inputType="text"
+                android:minHeight="48dp"
                 android:selectAllOnFocus="true"
                 android:textColor="#FF7C7C7C"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/state" />
+
             <EditText
                 android:id="@+id/colony"
-                android:layout_width="0dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
                 android:hint="Colonia"
                 android:inputType="text"
+                android:minHeight="48dp"
                 android:selectAllOnFocus="true"
                 android:textColor="#FF7C7C7C"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/city" />
+
             <EditText
                 android:id="@+id/street"
-                android:layout_width="0dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
                 android:hint="Calle"
                 android:inputType="text"
+                android:minHeight="48dp"
                 android:selectAllOnFocus="true"
                 android:textColor="#FF7C7C7C"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/colony" />
+
             <EditText
                 android:id="@+id/postalcode"
-                android:layout_width="0dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
                 android:hint="CP"
                 android:inputType="text"
+                android:minHeight="48dp"
                 android:selectAllOnFocus="true"
                 android:textColor="#FF7C7C7C"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/street" />
+
             <EditText
                 android:id="@+id/number"
-                android:layout_width="0dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
-                android:hint="Apellido Materno"
+                android:hint="Numero"
                 android:inputType="text"
+                android:minHeight="48dp"
                 android:selectAllOnFocus="true"
                 android:textColor="#FF7C7C7C"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/postalcode" />
+
+            <Button
+                android:id="@+id/upload"
+                android:layout_width="188dp"
+                android:layout_height="64dp"
+                android:layout_gravity="start"
+                android:layout_marginTop="24dp"
+                android:enabled="false"
+                android:text="Subir archivos"
+                android:textColor="@color/white"
+                android:textColorHint="#000000"
+                app:backgroundTint="#F49225"
+                app:cornerRadius="90dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/postalcode"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Button
+                android:id="@+id/register"
+                android:layout_width="188dp"
+                android:layout_height="64dp"
+                android:layout_gravity="start"
+                android:layout_marginTop="24dp"
+                android:enabled="false"
+                android:text="Registrar"
+                android:textColor="@color/white"
+                android:textColorHint="#000000"
+                app:backgroundTint="#F49225"
+                app:cornerRadius="90dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/upload"
+                app:layout_constraintVertical_bias="0.0" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
