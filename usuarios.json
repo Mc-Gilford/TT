@@ -1,241 +1,345 @@
-/* User */
+/* Usuario */
 {
     "_id":1,
-    "email":"mail@mail.com",
-    "password":"ENCRYPTED",
-    "person":
+    "correo":"mail@mail.com",
+    "contrasena":"ENCRYPTED",
+    "persona":
         {
             "_id":1,
-            "name":"Jose",
-            "lastname":"Rodriguez",
-            "secondname":"Aparicio",
-            "phone": "55XXXXXXXX",
-            "address":
+            "nombre":"Jose",
+            "apellidoPaterno":"Rodriguez",
+            "apellidoMaterno":"Aparicio",
+            "telefono": "55XXXXXXXX",
+            "direccion":
                 {
                     "_id":1,
-                    "country":"Mexico",
-                    "state":"Mexico",
-                    "city":"CDMX",
-                    "colony":"Colonia",
-                    "street":"Hangares",
-                    "postalCode":55850,
-                    "number":1
+                    "pais":"Mexico",
+                    "estado":"Mexico",
+                    "ciudad":"CDMX",
+                    "colonia":"Colonia",
+                    "calle":"Hangares",
+                    "codigoPostal":55850,
+                    "numero":1
                 },
-            "data":
+            "archivos":
                 [
                     "rutaUno",
                     "rutaDos"
                 ]
         },
-    "account":
+    "cuenta":
         {
-            "cardNumber": "XXXX-XXXX-XXXX-XXXX",
-            "typeCard":"Credit",
-            "accountNumber":"XXXX-XXXX-XXXX-XXXX-XX",
-            "amount": 0.00
+            "NumeroDeCuenta": "XXXX-XXXX-XXXX-XXXX",
+            "tipoDeTarjeta":"Credit",
+            "numeroDeCuenta":"XXXX-XXXX-XXXX-XXXX-XX",
+            "cantidad": 0.00
         },
-    "idActive": true,
+    "idActivo": true,
     "coordX":0.000,
     "coordY":0.000   
 }
 /*Cliente*/
 {
     "_id":1,
-    "email":"mail@mail.com",
-    "password":"ENCRYPTED",
-    "person":
+    "correo":"mail@mail.com",
+    "contrasena":"ENCRYPTED",
+    "persona":
         {
             "_id":1,
-            "name":"Jose",
-            "lastname":"Rodriguez",
-            "secondname":"Aparicio",
-            "phone": "55XXXXXXXX",
-            "address":
+            "nombre":"Juan",
+            "apellidoPaterno":"Rodriguez",
+            "apellidoMaterno":"Dominguez",
+            "telefono": "55XXXXXXXX",
+            "direccion":
                 {
                     "_id":1,
-                    "country":"Mexico",
-                    "state":"Mexico",
-                    "city":"CDMX",
-                    "colony":"Colonia",
-                    "street":"Hangares",
-                    "postalCode":55850,
-                    "number":1
+                    "pais":"Mexico",
+                    "estado":"Mexico",
+                    "ciudad":"CDMX",
+                    "colonia":"Colonia",
+                    "calle":"Hangares",
+                    "codigoPostal":55850,
+                    "numero":1
                 },
-            "data":
+            "archivos":
                 [
                     "rutaUno",
                     "rutaDos"
                 ]
         },
-    "account":
+    "cuenta":
         {
-            "cardNumber": "XXXX-XXXX-XXXX-XXXX",
-            "typeCard":"Credit",
-            "accountNumber":"XXXX-XXXX-XXXX-XXXX-XX",
-            "amount": 0.00
+            "NumeroDeCuenta": "XXXX-XXXX-XXXX-XXXX",
+            "tipoDeTarjeta":"Credit",
+            "numeroDeCuenta":"XXXX-XXXX-XXXX-XXXX-XX",
+            "cantidad": 0.00
         },
-    "idActive": true,
+    "idActivo": true,
     "coordX":0.000,
     "coordY":0.000,
-    "professionals":[
+    "profesionistas":[
         {
             "_id":1,
-            "email":"mail@mail.com",
-            "password":"ENCRYPTED",
-            "person":
+            "correo":"mail@mail.com",
+            "contrasena":"ENCRYPTED",
+            "persona":
                 {
                     "_id":1,
-                    "name":"Jose",
-                    "lastname":"Rodriguez",
-                    "secondname":"Aparicio",
-                    "phone": "55XXXXXXXX",
-                    "address":
+                    "nombre":"Jose",
+                    "apellidoPaterno":"Rodriguez",
+                    "apellidoMaterno":"Aparicio",
+                    "telefono": "55XXXXXXXX",
+                    "direccion":
                         {
                             "_id":1,
-                            "country":"Mexico",
-                            "state":"Mexico",
-                            "city":"CDMX",
-                            "colony":"Colonia",
-                            "street":"Hangares",
-                            "postalCode":55850,
-                            "number":1
+                            "pais":"Mexico",
+                            "estado":"Mexico",
+                            "ciudad":"CDMX",
+                            "colonia":"Colonia",
+                            "calle":"Hangares",
+                            "codigoPostal":55850,
+                            "numero":1
                         },
-                    "data":
+                    "archivos":
                         [
                             "rutaUno",
                             "rutaDos"
                         ]
                 },
-            "account":
+            "cuenta":
                 {
-                    "cardNumber": "XXXX-XXXX-XXXX-XXXX",
-                    "typeCard":"Credit",
-                    "accountNumber":"XXXX-XXXX-XXXX-XXXX-XX",
-                    "amount": 0.00
+                    "NumeroDeCuenta": "XXXX-XXXX-XXXX-XXXX",
+                    "tipoDeTarjeta":"Credit",
+                    "numeroDeCuenta":"XXXX-XXXX-XXXX-XXXX-XX",
+                    "cantidad": 0.00
                 },
-            "idActive": true,
+            "idActivo": true,
             "coordX":0.000,
             "coordY":0.000,
-            "services": [
+            "servicios": [
                 {
                     "_id":1,
-                    "name":"Estetica",
-                    "cost":54.30,
-                    "details":"Cortes caballero",
-                    "time": "1hr"
+                    "nombre":"Estetica",
+                    "costo":54.30,
+                    "detalles":"Cortes caballero",
+                    "tiempo": "1hr"
                 }
             ]   
         }
-    ]
-}
-/*Profesional*/
-{
-    "_id":1,
-    "email":"mail@mail.com",
-    "password":"ENCRYPTED",
-    "person":
+    ],
+    "solicitudes":[
         {
             "_id":1,
-            "name":"Jose",
-            "lastname":"Rodriguez",
-            "secondname":"Aparicio",
-            "phone": "55XXXXXXXX",
-            "address":
+            "servicio":
                 {
                     "_id":1,
-                    "country":"Mexico",
-                    "state":"Mexico",
-                    "city":"CDMX",
-                    "colony":"Colonia",
-                    "street":"Hangares",
-                    "postalCode":55850,
-                    "number":1
+                    "nombre":"Estetica",
+                    "costo":54.30,
+                    "detalles":"Cortes caballero",
+                    "tiempo": "1hr"
                 },
-            "data":
+            "persona":
+                {
+                    "_id":1,
+                    "nombre":"Jose",
+                    "apellidoPaterno":"Rodriguez",
+                    "apellidoMaterno":"Aparicio",
+                    "telefono": "55XXXXXXXX",
+                    "direccion":
+                        {
+                            "_id":1,
+                            "pais":"Mexico",
+                            "estado":"Mexico",
+                            "ciudad":"CDMX",
+                            "colonia":"Colonia",
+                            "calle":"Hangares",
+                            "codigoPostal":55850,
+                            "numero":1
+                        },
+                    "archivos":
+                        []
+                }
+        }
+    ]
+}
+/*Profesionista*/
+{
+    "_id":1,
+    "correo":"mail@mail.com",
+    "contrasena":"ENCRYPTED",
+    "persona":
+        {
+            "_id":1,
+            "nombre":"Jose",
+            "apellidoPaterno":"Rodriguez",
+            "apellidoMaterno":"Aparicio",
+            "telefono": "55XXXXXXXX",
+            "direccion":
+                {
+                    "_id":1,
+                    "pais":"Mexico",
+                    "estado":"Mexico",
+                    "ciudad":"CDMX",
+                    "colonia":"Colonia",
+                    "calle":"Hangares",
+                    "codigoPostal":55850,
+                    "numero":1
+                },
+            "archivos":
                 [
                     "rutaUno",
                     "rutaDos"
                 ]
         },
-    "account":
+    "cuenta":
         {
-            "cardNumber": "XXXX-XXXX-XXXX-XXXX",
-            "typeCard":"Credit",
-            "accountNumber":"XXXX-XXXX-XXXX-XXXX-XX",
-            "amount": 0.00
+            "NumeroDeCuenta": "XXXX-XXXX-XXXX-XXXX",
+            "tipoDeTarjeta":"Credit",
+            "numeroDeCuenta":"XXXX-XXXX-XXXX-XXXX-XX",
+            "cantidad": 0.00
         },
-    "idActive": true,
+    "idActivo": true,
     "coordX":0.000,
     "coordY":0.000,
-    "services": [
+    "servicios": [
         {
             "_id":1,
-            "name":"Estetica",
-            "cost":54.30,
-            "details":"Cortes caballero",
-            "time": "1hr"
+            "nombre":"Estetica",
+            "costo":54.30,
+            "detalles":"Cortes caballero",
+            "tiempo": "1hr"
         },
         {
             "_id":2,
-            "name":"Estetica",
-            "cost":54.30,
-            "details":"Cortes dama",
-            "time": "1hr"
+            "nombre":"Estetica",
+            "costo":54.30,
+            "detalles":"Cortes dama",
+            "tiempo": "1hr"
         }
     ],
-    "idJob":"xxxxxxxxxx",
-    "score":9.8
-}
-
-/*Person*/
-{
-    "_id":1,
-    "name":"Jose",
-    "lastname":"Rodriguez",
-    "secondname":"Aparicio",
-    "phone": "55XXXXXXXX",
-    "address":
+    "cedula":"xxxxxxxxxx",
+    "score":9.6,
+    "calificaciones": [10,10,9],
+    "comentarios": ["Bien","Excelente"],
+    "solicitudes": [
         {
             "_id":1,
-            "country":"Mexico",
-            "state":"Mexico",
-            "city":"CDMX",
-            "colony":"Colonia",
-            "street":"Hangares",
-            "postalCode":55850,
-            "number":1
+            "servicio":
+                {
+                    "_id":1,
+                    "nombre":"Estetica",
+                    "costo":54.30,
+                    "detalles":"Cortes caballero",
+                    "tiempo": "1hr"
+                },
+            "persona":
+                {
+                    "_id":1,
+                    "nombre":"Juan",
+                    "apellidoPaterno":"Rodriguez",
+                    "apellidoMaterno":"Dominguez",
+                    "telefono": "55XXXXXXXX",
+                    "direccion":
+                        {
+                            "_id":1,
+                            "pais":"Mexico",
+                            "estado":"Mexico",
+                            "ciudad":"CDMX",
+                            "colonia":"Colonia",
+                            "calle":"Hangares",
+                            "codigoPostal":55850,
+                            "numero":1
+                        },
+                    "archivos":
+                        []
+                }
+        }
+    ]
+}
+
+/*Persona*/
+{
+    "_id":1,
+    "nombre":"Jose",
+    "apellidoPaterno":"Rodriguez",
+    "apellidoMaterno":"Aparicio",
+    "telefono": "55XXXXXXXX",
+    "direccion":
+        {
+            "_id":1,
+            "pais":"Mexico",
+            "estado":"Mexico",
+            "ciudad":"CDMX",
+            "colonia":"Colonia",
+            "calle":"Hangares",
+            "codigoPostal":55850,
+            "numero":1
         },
-    "data":
+    "archivos":
         [
             "rutaUno",
             "rutaDos"
         ]
 }
 
-/*Address*/
+/*Direccion*/
 {
     "_id":1,
-    "country":"Mexico",
-    "state":"Mexico",
-    "city":"CDMX",
-    "colony":"Colonia",
-    "street":"Hangares",
-    "postalCode":55850,
-    "number":1
+    "pais":"Mexico",
+    "estado":"Mexico",
+    "ciudad":"CDMX",
+    "colonia":"Colonia",
+    "calle":"Hangares",
+    "codigoPostal":55850,
+    "numero":1
 }
 
 /*Cuenta*/
 {
-    "cardNumber": "XXXX-XXXX-XXXX-XXXX",
-    "typeCard":"Credit",
-    "accountNumber":"XXXX-XXXX-XXXX-XXXX-XX",
-    "amount": 0.00
+    "NumeroDeCuenta": "XXXX-XXXX-XXXX-XXXX",
+    "tipoDeTarjeta":"Credit",
+    "numeroDeCuenta":"XXXX-XXXX-XXXX-XXXX-XX",
+    "cantidad": 0.00
 }
 /*Servicio*/
 {
     "_id":1,
-    "name":"Estetica",
-    "cost":54.30,
-    "details":"Cortes caballero",
-    "time": "1hr"
+    "nombre":"Estetica",
+    "costo":54.30,
+    "detalles":"Cortes caballero",
+    "tiempo": "1hr"
+}
+
+/*Solicitud*/
+{
+    "_id":1,
+    "servicio":
+        {
+            "_id":1,
+            "nombre":"Estetica",
+            "costo":54.30,
+            "detalles":"Cortes caballero",
+            "tiempo": "1hr"
+        },
+    "persona":
+        {
+            "_id":1,
+            "nombre":"Jose",
+            "apellidoPaterno":"Rodriguez",
+            "apellidoMaterno":"Aparicio",
+            "telefono": "55XXXXXXXX",
+            "direccion":
+                {
+                    "_id":1,
+                    "pais":"Mexico",
+                    "estado":"Mexico",
+                    "ciudad":"CDMX",
+                    "colonia":"Colonia",
+                    "calle":"Hangares",
+                    "codigoPostal":55850,
+                    "numero":1
+                },
+            "archivos":
+                []
+        }
 }

@@ -1,8 +1,11 @@
-package com.example.domu.entity;
+package com.example.domus.entity;
 
 import java.util.List;
 
 public class Client extends User{
+    
+    private List<Professional> professionals; /*Este sirve para guardar a los profesionales que le gustaron su servicio*/
+    
     public List<Professional> getProfessionals() {
         return professionals;
     }
@@ -10,6 +13,4 @@ public class Client extends User{
     public void setProfessionals(List<Professional> professionals) {
         this.professionals = professionals;
     }
-
-    private List<Professional> professionals; /*Este sirve para guardar a los profesionales que le gustaron su servicio*/
 }

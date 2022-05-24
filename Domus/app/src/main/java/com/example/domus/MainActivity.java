@@ -19,9 +19,7 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Do something in response to button click
-                Intent intent = new Intent(MainActivity.this, Register.class);
-                System.out.println("Jola");
+                Intent intent = new Intent (getApplicationContext(), Register.class);
                 startActivity(intent);
             }
         });

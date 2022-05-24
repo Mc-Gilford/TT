@@ -1,4 +1,4 @@
-package com.example.domu.entity;
+package com.example.domus.entity;
 
 import java.util.List;
 
