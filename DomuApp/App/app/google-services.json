@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1018642291423",
+    "firebase_url": "https://domu-1-default-rtdb.firebaseio.com/",
+    "project_id": "domu-1",
+    "storage_bucket": "domu-1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1018642291423:android:b3c566de7e4092ecfae76a",
+        "android_client_info": {
+          "package_name": "com.matias.domuapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1018642291423-3fv0hndelg3omvfthdbd5blquf39n5dd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.matias.domuapp",
+            "certificate_hash": "b4ffb6cd6aaf07f0c7d4f3343564f6444138908a"
+          }
+        },
+        {
+          "client_id": "1018642291423-kts0iudugotbn80or27932navuj6a7dt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLC6RQ4uPYwkqhc9CNsmHSVK5hqf344KM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1018642291423-kts0iudugotbn80or27932navuj6a7dt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

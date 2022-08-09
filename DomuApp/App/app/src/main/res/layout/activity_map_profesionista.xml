@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".activities.profesionista.MapProfesionistaActivity">
+
+    <include layout="@layout/action_bar_toollbar" />
+
+    <fragment
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        />
+
+    <Button
+        android:id="@+id/btnConnect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CONECTARSE"
+        android:textColor="@color/white"
+        android:layout_gravity="bottom"
+        android:layout_margin="30dp"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="@color/colorPrimaryDark"
+        />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
