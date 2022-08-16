@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.matias.domuapp.R;
 import com.matias.domuapp.activities.cliente.MapClienteActivity;
-import com.matias.domuapp.activities.profesionista.MapProfesionistaActivity;
+import com.matias.domuapp.activities.profesional.MapProfesionistaActivity;
 
 public class MainActivity extends AppCompatActivity {
     Button mButtonProfesionista;

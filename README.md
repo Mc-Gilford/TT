@@ -388,3 +388,20 @@ private class Service
 
 
 ![Service](https://github.com/McGilfordJose/TT/blob/main/Images/service.png)
+
+## Disenio de App
+
+La app estara compuesta de los siguientes colores
+
+``` html
+    <color name="colorPrimary">#00ADC5</color>
+    <color name="colorSecondary">#F49225</color>
+```
+
+## Definicion Profesional
+Toda aquella persona que se dedica a brindar servicios de calidad sin la necesidad de tener un titulo y que este comprometida ha realizar un trabajo eficiente.
+
+## Links para mejoras
+Los siguientes links nos permitira realizar cierta mejoras dentro de la visualizacion como en codigo
+1. [DatePicker](https://programacionymas.com/blog/como-pedir-fecha-android-usando-date-picker)
+2. [TextInputLayout](https://medium.com/omisoft/textinputlayout-styling-8b36a5e0d73c)

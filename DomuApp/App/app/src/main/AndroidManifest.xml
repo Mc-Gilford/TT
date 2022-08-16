@@ -17,13 +17,13 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".activities.profesionista.MapProfesionistaActivity"
+            android:name=".activities.profesional.MapProfesionistaActivity"
             android:exported="false" />
         <activity
             android:name=".activities.cliente.MapClienteActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.profesionista.RegisterProfesionistaActivity"
+            android:name=".activities.profesional.RegisterProfesionistaActivity"
             android:parentActivityName=".activities.SelectOptionAuthActivity"
             android:exported="false" />
         <activity

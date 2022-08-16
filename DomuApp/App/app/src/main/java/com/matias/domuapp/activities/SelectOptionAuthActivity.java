@@ -11,7 +11,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.matias.domuapp.R;
 import com.matias.domuapp.activities.cliente.RegisterActivity;
-import com.matias.domuapp.activities.profesionista.RegisterProfesionistaActivity;
+import com.matias.domuapp.activities.profesional.RegisterProfesionistaActivity;
 
 public class SelectOptionAuthActivity extends AppCompatActivity {
 

@@ -5,89 +5,107 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".activities.LoginActivity"
-    android:background="@color/colorPrimary">
+    tools:context=".activities.LoginActivity">
 
+    <include layout="@layout/action_bar_toollbar" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
+
         <ImageView
-            android:layout_width="290dp"
-            android:layout_height="418dp"
-            android:layout_marginBottom="8dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:src="@drawable/icon_home"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="20dp"
             android:layout_gravity="center"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_margin="10dp">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/icon_email" />
+
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:hintTextAppearance="@color/colorWhite"
-                app:errorTextAppearance="#CF0000">
+                android:layout_marginLeft="5dp"
+                >
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColorHint="#fff"
                     android:hint="Correo electronico"
-                    android:inputType="textEmailAddress"
-                    android:textColor="#FFFFFF"
-                    android:backgroundTint="#E4E4E4">
+                    android:inputType="textEmailAddress">
+
                 </com.google.android.material.textfield.TextInputEditText>
+
             </com.google.android.material.textfield.TextInputLayout>
+
         </LinearLayout>
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_margin="10dp">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/icon_password" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_marginLeft="5dp"
-                android:layout_height="wrap_content"
-                app:hintTextAppearance="@color/colorWhite"
-                app:errorTextAppearance="#CF0000">
+                android:layout_height="wrap_content">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColorHint="#fff"
                     android:hint="Contraseña"
-                    android:inputType="textPassword"
-                    android:textColor="#FFFFFF"
-                    android:backgroundTint="#E4E4E4">
+                    android:inputType="textPassword">
+
                 </com.google.android.material.textfield.TextInputEditText>
+
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="bottom">
+
             <Button
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/rounded_button"
-                android:backgroundTint="@color/colorSecondary"
                 android:text="INGRESAR"
-                android:textColor="@color/colorWhite" />
-            <Button
-                android:id="@+id/btnRegistrar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
                 android:background="@drawable/rounded_button"
-                android:backgroundTint="@color/colorSecondary"
-                android:text="Registrar"
+                android:backgroundTint="@color/colorPrimary"
+                android:layout_margin="30dp"
                 android:textColor="@color/colorWhite" />
+
         </LinearLayout>
+
+
+
+
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

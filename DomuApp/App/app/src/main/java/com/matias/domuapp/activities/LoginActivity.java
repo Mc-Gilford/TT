@@ -20,8 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.matias.domuapp.R;
 import com.matias.domuapp.activities.cliente.MapClienteActivity;
-import com.matias.domuapp.activities.cliente.RegisterActivity;
-import com.matias.domuapp.activities.profesionista.MapProfesionistaActivity;
+import com.matias.domuapp.activities.profesional.MapProfesionistaActivity;
 import com.matias.domuapp.includes.MyToolbar;
 
 import dmax.dialog.SpotsDialog;
