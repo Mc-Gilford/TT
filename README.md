@@ -405,3 +405,5 @@ Toda aquella persona que se dedica a brindar servicios de calidad sin la necesid
 Los siguientes links nos permitira realizar cierta mejoras dentro de la visualizacion como en codigo
 1. [DatePicker](https://programacionymas.com/blog/como-pedir-fecha-android-usando-date-picker)
 2. [TextInputLayout](https://medium.com/omisoft/textinputlayout-styling-8b36a5e0d73c)
+
+Hola
