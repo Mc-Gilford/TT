@@ -405,6 +405,7 @@ Toda aquella persona que se dedica a brindar servicios de calidad sin la necesid
 Los siguientes links nos permitira realizar cierta mejoras dentro de la visualizacion como en codigo
 1. [DatePicker](https://programacionymas.com/blog/como-pedir-fecha-android-usando-date-picker)
 2. [TextInputLayout](https://medium.com/omisoft/textinputlayout-styling-8b36a5e0d73c)
+3. [SpotsDialog](http://dybarsky.blogspot.com/2015/01/spots-progress-dialog.html)
 
 ## Base de datos de documentos
 Este tipo de base de datos maneja datos semiestructurados contienen un identificado unico los campos de los que consta los documentos son transparentes para el sistema de administración. En las bases de datos documentales cada documento puede tener su propia estructura.  Los más usuales son JSON o XML, aunque también existen otros como YAML o BSON, o incluso como un fichero de texto. Dependiendo de la base de datos documental los identificadores de los documentos se crearán automáticamente o utilizaremos un atributo para usarlo como clave; pero una diferencia clara con las bases de datos pares clave-valor es que como los campos son transparente podemos construir consultas sobre los documentos basándose en ellos, incluso indexando sus valores para permitir una gran velocidad de consulta.

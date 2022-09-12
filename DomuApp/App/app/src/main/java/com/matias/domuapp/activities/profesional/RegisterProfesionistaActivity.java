@@ -96,7 +96,7 @@ public class RegisterProfesionistaActivity extends AppCompatActivity {
                 if (task.isSuccessful()){
                     String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
                     Profesional profesionista = new Profesional();
-                    create(profesionista);
+                    //create(profesionista);
                 }
                 else{
                     Toast.makeText(RegisterProfesionistaActivity.this, "Hubo un error al registrar usuario", Toast.LENGTH_SHORT).show();
@@ -105,7 +105,7 @@ public class RegisterProfesionistaActivity extends AppCompatActivity {
         });
     }
 
-    void create(Profesional profesionista){
+   /* void create(Profesional profesionista){
         mProfesionistaProvider.create(profesionista).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -121,5 +121,5 @@ public class RegisterProfesionistaActivity extends AppCompatActivity {
             }
         });
 
-    }
+    }*/
 }

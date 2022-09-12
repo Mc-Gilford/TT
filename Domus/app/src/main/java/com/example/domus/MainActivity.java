@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.domus.entity.User;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -16,6 +18,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button button = findViewById(R.id.register);
+        EditText correo = findViewById(R.id.name);
+        EditText password =
+        User usuario = new User();
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -9,6 +9,24 @@ public class Usuario {
     private Boolean idActive;/*Indica si el usuario tiene su perfil activo */
     private Double coordX;
     private Double coordY;
+    private String typeUser;
+
+    public Usuario(){
+
+    }
+    public Usuario(String email, String password)
+    {
+        this.email=email;
+        this.password=password;
+    }
+    public String getTypeUser() {
+        return typeUser;
+    }
+
+    public void setTypeUser(String typeUser) {
+        this.typeUser = typeUser;
+    }
+
 
     public Integer getId() {
         return id;
