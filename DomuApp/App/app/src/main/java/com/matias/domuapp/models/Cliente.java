@@ -3,7 +3,13 @@ package com.matias.domuapp.models;
 import java.util.List;
 
 public class Cliente extends Usuario {
-    
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "professionals=" + professionals +
+                '}';
+    }
+
     private List<Profesional> professionals; /*Este sirve para guardar a los profesionales que le gustaron su servicio*/
     public  Cliente(){
 

@@ -11,7 +11,6 @@ public class ClienteProvider {
     DatabaseReference mDatabase;
 
     public ClienteProvider() {
-        mDatabase = FirebaseDatabase.getInstance("https://domu-1-default-rtdb.firebaseio.com/").getReference().child("Users").child("Clients");
     }
 
     /*public Task<Void> create(Cliente client) {

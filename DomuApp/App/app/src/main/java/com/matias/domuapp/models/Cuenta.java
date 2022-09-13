@@ -6,6 +6,16 @@ public class Cuenta {
     private String accounNumber;
     private Double amount;
 
+    @Override
+    public String toString() {
+        return "Cuenta{" +
+                "cardNumber='" + cardNumber + '\'' +
+                ", typeCard='" + typeCard + '\'' +
+                ", accounNumber='" + accounNumber + '\'' +
+                ", amount=" + amount +
+                '}';
+    }
+
     public String getCardNumber() {
         return cardNumber;
     }

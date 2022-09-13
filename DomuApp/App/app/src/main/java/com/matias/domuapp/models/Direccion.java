@@ -10,6 +10,20 @@ public class Direccion {
     private String postalCode;
     private Integer number;
 
+    @Override
+    public String toString() {
+        return "Direccion{" +
+                "id='" + id + '\'' +
+                ", country='" + country + '\'' +
+                ", state='" + state + '\'' +
+                ", city='" + city + '\'' +
+                ", colony='" + colony + '\'' +
+                ", street='" + street + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", number=" + number +
+                '}';
+    }
+
     public String getId() {
         return id;
     }

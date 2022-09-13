@@ -11,6 +11,19 @@ public class Persona {
     private Direccion address;
     private List<String> data;
 
+    @Override
+    public String toString() {
+        return "Persona{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", secondname='" + secondname + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address=" + address +
+                ", data=" + data +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }

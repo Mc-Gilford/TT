@@ -1,8 +1,11 @@
 package com.matias.domuapp.controller;
 
 import android.content.Context;
+import android.content.Intent;
 import android.widget.Toast;
 
+import com.matias.domuapp.activities.cliente.MapClienteActivity;
+import com.matias.domuapp.activities.profesionista.MapProfesionistaActivity;
 import com.matias.domuapp.models.Usuario;
 
 public class UserController {
@@ -21,6 +24,24 @@ public class UserController {
         else {
             Toast.makeText(context, "La contraseña debe tener mas de 6 caracteres", Toast.LENGTH_SHORT).show();
             return false;
+        }
+    }
+    public Boolean validarTipoDeUsuario(Usuario user, Context context)
+    {
+        Boolean status =false;
+        System.out.println("Validador de tipo de Usuario");
+        if(user.getTypeUser().equals("Cliente")){
+            Intent intent = new Intent(context, MapClienteActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            context.startActivity(intent);
+            status=true;
+            return status;
+        }
+        else {
+            Intent intent = new Intent(context, MapProfesionistaActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            context.startActivity(intent);
+            return status;
         }
     }
 }

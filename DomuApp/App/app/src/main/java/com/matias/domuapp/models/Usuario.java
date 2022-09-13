@@ -9,6 +9,22 @@ public class Usuario {
     private Boolean idActive;/*Indica si el usuario tiene su perfil activo */
     private Double coordX;
     private Double coordY;
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", person=" + person +
+                ", account=" + account +
+                ", idActive=" + idActive +
+                ", coordX=" + coordX +
+                ", coordY=" + coordY +
+                ", typeUser='" + typeUser + '\'' +
+                '}';
+    }
+
     private String typeUser;
 
     public Usuario(){

@@ -7,6 +7,17 @@ public class Servicio {
     private String details;
     private String time;
 
+    @Override
+    public String toString() {
+        return "Servicio{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", cost=" + cost +
+                ", details='" + details + '\'' +
+                ", time='" + time + '\'' +
+                '}';
+    }
+
     public String getId() {
         return id;
     }

@@ -7,6 +7,17 @@ public class Profesional extends Usuario {
     private String idJob;/*La cedula profesional del profesional*/
     private Float score;
     private List<Integer> qualification; /*Calificaciones por usuarios*/
+
+    @Override
+    public String toString() {
+        return "Profesional{" +
+                "services=" + services +
+                ", idJob='" + idJob + '\'' +
+                ", score=" + score +
+                ", qualification=" + qualification +
+                '}';
+    }
+
     public Profesional(){
 
     }
