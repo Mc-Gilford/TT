@@ -1,47 +1,23 @@
 package com.matias.domuapp.models;
 
-public class Cliente {
-    String id;
-    String name;
-    String email;
-    String domicilio;
+import java.util.List;
 
-    public Cliente(String id, String name, String email, String domicilio) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.domicilio = domicilio;
+public class Cliente extends Usuario {
+    
+    private List<Profesional> professionals; /*Este sirve para guardar a los profesionales que le gustaron su servicio*/
+    public  Cliente(){
+
+    }
+    public Cliente(String email, String password) {
+        super(email, password);
     }
 
-    public String getId() {
-        return id;
+
+    public List<Profesional> getProfessionals() {
+        return professionals;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getDomicilio() {
-        return domicilio;
-    }
-
-    public void setDomicilio(String domicilio) {
-        this.domicilio = domicilio;
+    public void setProfessionals(List<Profesional> professionals) {
+        this.professionals = professionals;
     }
 }
