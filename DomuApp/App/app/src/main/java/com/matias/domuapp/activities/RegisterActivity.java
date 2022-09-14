@@ -1,20 +1,14 @@
-package com.matias.domuapp.activities.cliente;
+package com.matias.domuapp.activities;
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 import com.matias.domuapp.R;
 import com.matias.domuapp.includes.MyToolbar;
 import com.matias.domuapp.models.Cliente;
@@ -40,7 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        mDialog = new SpotsDialog.Builder().setContext(RegisterActivity.this).setMessage("Espere un momento").build();
+       /* mDialog = new SpotsDialog.Builder().setContext(RegisterActivity.this).setMessage("Espere un momento").build();
 
 
         MyToolbar.show(this, "Registro de usuario", true);
@@ -59,10 +53,10 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 clickRegister();
             }
-        });
+        });*/
 
     }
-
+/*
     void clickRegister() {
         final String name = mTextInputName.getText().toString();
         final String email = mTextInputEmail.getText().toString();
@@ -83,9 +77,8 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(this, "Ingrese todos los campos", Toast.LENGTH_SHORT).show();
         }
     }
-
     void register(final String name, final String email, String password, final String domicilio){
-       /* mAuthProvider.register(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuthProvider.register(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 mDialog.hide();
@@ -98,11 +91,10 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "Hubo un error al registrar usuario", Toast.LENGTH_SHORT).show();
                 }
             }
-        });*/
+        });
     }
 
     void create(Cliente cliente){
-        /*
         mClienteProvider.create(cliente).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -116,11 +108,11 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this,"Error: no se pudo crear el cliente",Toast.LENGTH_SHORT).show();
                 }
             }
-        });*/
+        });
 
     }
 
-    /*void saveUser(String id, String name, String email) {
+    void saveUser(String id, String name, String email) {
         String selectedUser = mPref.getString("user", "");
         User user = new User();
         user.setEmail(email);
@@ -154,5 +146,5 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     }
-     */
+    */
 }

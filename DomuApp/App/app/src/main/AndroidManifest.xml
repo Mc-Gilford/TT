@@ -27,14 +27,8 @@
             android:parentActivityName=".activities.SelectOptionAuthActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".activities.RegisterActivity"
             android:parentActivityName=".activities.SelectOptionAuthActivity" />
-        <activity
-            android:name=".activities.cliente.RegisterActivity"
-            android:parentActivityName=".activities.SelectOptionAuthActivity" />
-        <activity
-            android:name=".activities.SelectOptionAuthActivity"
-            android:parentActivityName=".activities.MainActivity" />
         <activity
             android:name=".activities.MainActivity">
             <intent-filter>

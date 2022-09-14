@@ -9,6 +9,8 @@ import com.matias.domuapp.activities.profesionista.MapProfesionistaActivity;
 import com.matias.domuapp.models.Usuario;
 
 public class UserController {
+
+
     public Boolean validateEmailandPassword(Usuario user, Context context)
     {
         if (!user.getEmail().isEmpty() && !user.getPassword().isEmpty()) {
@@ -16,6 +18,8 @@ public class UserController {
         }
         return !user.getEmail().isEmpty() && !user.getPassword().isEmpty()&&validateFields(user.getPassword(),user.getEmail(),context);
     }
+
+
     public Boolean validateFields(String password, String email,Context context)
     {
         if(password.length()>6 && email.contains("@")) {
@@ -26,6 +30,8 @@ public class UserController {
             return false;
         }
     }
+
+
     public Boolean validarTipoDeUsuario(Usuario user, Context context)
     {
         Boolean status =false;

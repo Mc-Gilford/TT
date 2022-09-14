@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.matias.domuapp.R;
 import com.matias.domuapp.controller.LoginController;
+import com.matias.domuapp.controller.RegisterController;
 import com.matias.domuapp.models.Usuario;
 import com.matias.domuapp.models.dao.GeneralDao;
 
@@ -36,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         mButtonRegister = findViewById(R.id.btnRegistrar);
         mTextInputEmail = (TextInputEditText) findViewById(R.id.textInputEmail);
         mTextInputPassword = (TextInputEditText) findViewById(R.id.textInputPassword);
-        GeneralDao generalDao = new GeneralDao();
-        if(generalDao.conexion(mDatabase)) {
+        GeneralDao generalDao = new GeneralDao(mDatabase);
+        if(generalDao.conexion()) {
             mButtonLogin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -52,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
             mButtonRegister.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    RegisterController registerController = new RegisterController();
+                    registerController.goToRegister(MainActivity.this);
                 }
             });
         }

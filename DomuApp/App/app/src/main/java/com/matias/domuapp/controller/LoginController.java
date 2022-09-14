@@ -8,6 +8,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.matias.domuapp.models.Usuario;
 import com.matias.domuapp.models.dao.UserDao;
 
@@ -25,6 +26,8 @@ public class LoginController {
             signIn(mAuth,user,mDialog,context);
         }
     }
+
+
     @NonNull
     private Boolean signIn(FirebaseAuth mAuth, Usuario user,AlertDialog mDialog, Context context){
         UserDao userDao = new UserDao();

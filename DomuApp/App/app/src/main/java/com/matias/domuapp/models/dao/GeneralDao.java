@@ -6,11 +6,20 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class GeneralDao {
     private static String uri = "https://domu-1-default-rtdb.firebaseio.com/";
-    public Boolean conexion( DatabaseReference mDatabase)
+    private DatabaseReference mDatabase;
+    public GeneralDao(DatabaseReference mDatabase)
     {
-        mDatabase = FirebaseDatabase.getInstance(this.uri).getReference();
+    this.mDatabase=mDatabase;
+    }
+
+    public Boolean conexion()
+    {
+        this.mDatabase = FirebaseDatabase.getInstance(this.uri).getReference();
         System.out.println("Conexion a la DB "+mDatabase);
         return !mDatabase.toString().isEmpty();
     }
 
+    public DatabaseReference getmDatabase() {
+        return mDatabase;
+    }
 }
