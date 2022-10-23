@@ -10,7 +10,7 @@ public class Profesional extends Usuario {
 
     @Override
     public String toString() {
-        return "Profesional{" +
+        return super.toString()+"Profesional{" +
                 "services=" + services +
                 ", idJob='" + idJob + '\'' +
                 ", score=" + score +
@@ -19,7 +19,7 @@ public class Profesional extends Usuario {
     }
 
     public Profesional(){
-
+        super();
     }
     public Profesional(String email, String password) {
         super(email, password);

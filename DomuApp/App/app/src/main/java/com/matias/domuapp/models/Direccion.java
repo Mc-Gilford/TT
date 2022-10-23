@@ -72,7 +72,7 @@ public class Direccion {
         this.street = street;
     }
 
-    public String getPostalCode() {
+    public String getPostalCode(String s) {
         return postalCode;
     }
 

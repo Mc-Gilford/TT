@@ -1,7 +1,7 @@
 package com.matias.domuapp.models;
 
 public class Usuario {
-    private Integer id;
+    private String id;
     private String email;
     private String password;
     private Persona person;
@@ -9,6 +9,7 @@ public class Usuario {
     private Boolean idActive;/*Indica si el usuario tiene su perfil activo */
     private Double coordX;
     private Double coordY;
+    private String typeUser;
 
     @Override
     public String toString() {
@@ -25,7 +26,6 @@ public class Usuario {
                 '}';
     }
 
-    private String typeUser;
 
     public Usuario(){
 
@@ -44,11 +44,11 @@ public class Usuario {
     }
 
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

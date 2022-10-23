@@ -1,5 +1,6 @@
 package com.matias.domuapp.models;
 
+import java.util.Date;
 import java.util.List;
 
 public class Persona {
@@ -8,8 +9,21 @@ public class Persona {
     private String lastname;
     private String secondname;
     private String phone;
+    private Date birthDate;
     private Direccion address;
     private List<String> data;
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public Integer getId() {
+        return id;
+    }
 
     @Override
     public String toString() {
@@ -19,13 +33,10 @@ public class Persona {
                 ", lastname='" + lastname + '\'' +
                 ", secondname='" + secondname + '\'' +
                 ", phone='" + phone + '\'' +
+                ", birthDate=" + birthDate +
                 ", address=" + address +
                 ", data=" + data +
                 '}';
-    }
-
-    public Integer getId() {
-        return id;
     }
 
     public void setId(Integer id) {

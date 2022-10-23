@@ -19,7 +19,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.matias.domuapp.activities.cliente.MapClienteActivity;
 import com.matias.domuapp.activities.profesionista.MapProfesionistaActivity;
 import com.matias.domuapp.controller.UserController;
+import com.matias.domuapp.models.Cliente;
+import com.matias.domuapp.models.Profesional;
 import com.matias.domuapp.models.Usuario;
+import com.matias.domuapp.providers.ClienteProvider;
+import com.matias.domuapp.providers.ProfesionistaProvider;
 
 public class UserDao {
     DatabaseReference mDatabase;
@@ -34,6 +38,10 @@ public class UserDao {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     UserController userController = new UserController();
+                    Usuario newUser =getUsuario(user);
+                    System.out.println(user.toString());
+                    System.out.println(newUser.toString());
+                    // Debemos de obtener el usuario para validar que tipo es y pasarnos a la siguiente transicion
                     userController.validarTipoDeUsuario(user,context);
                     status=true;
                 }
@@ -47,13 +55,14 @@ public class UserDao {
     return status;
     }
 
-    public Boolean getUsuario(Usuario user) {
-        /*GeneralDao generalDao = new GeneralDao(mDatabase);
+
+    public Usuario getUsuario(Usuario user) {
+        GeneralDao generalDao = new GeneralDao(mDatabase);
         System.out.println(mDatabase);
         generalDao.getmDatabase().child("Users");
         generalDao.getmDatabase().child("Users").toString();
 
-        ObjectMapper objectMapper = new ObjectMapper();
+        //ObjectMapper objectMapper = new ObjectMapper();
         //generalDao.getmDatabase().child("Users").equalTo(user.getEmail());*/
 /*
         generalDao.getmDatabase().child("Users").equalTo(25).addChildEventListener(new ChildEventListener() {
@@ -66,6 +75,43 @@ public class UserDao {
         });*/
         //objectMapper.readValue();
         //mDatabase = FirebaseDatabase.getInstance("https://domu-1-default-rtdb.firebaseio.com/").getReference().child("Users").child("Clients");
-    return false;
+    return user;
     }
+
+    public void createUser(Object object, ClienteProvider mClienteProvider, final Context context)
+    {
+        mClienteProvider.create(object).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    Toast.makeText(context,"Registro Exitoso",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context, MapClienteActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    context.startActivity(intent);
+                }
+                else{
+                   Toast.makeText(context,"Error: no se pudo crear el cliente",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+    public void createUser(Object object, ProfesionistaProvider mProfesionistaProvider, final Context context)
+    {
+        mProfesionistaProvider.create(object).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    System.out.println("Registro exitoso");
+                    Toast.makeText(context,"Registro Exitoso",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context, MapProfesionistaActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    context.startActivity(intent);
+                }
+                else{
+                    Toast.makeText(context,"Error: no se pudo crear el cliente",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
 }

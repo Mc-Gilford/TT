@@ -12,8 +12,8 @@ public class AuthProvider {
     }
 
     public Task<AuthResult> register(String email, String password){
+        System.out.println("Registrando");
         return mAuth.createUserWithEmailAndPassword(email, password);
-
     }
 
     public Task<AuthResult> login(String email, String password){

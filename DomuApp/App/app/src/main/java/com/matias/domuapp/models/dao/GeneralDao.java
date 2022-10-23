@@ -19,6 +19,13 @@ public class GeneralDao {
         return !mDatabase.toString().isEmpty();
     }
 
+    public DatabaseReference easyConexion(DatabaseReference mDatabase){
+
+        System.out.println("Easy Conexion a DB"+mDatabase);
+        this.mDatabase = FirebaseDatabase.getInstance(this.uri).getReference();
+        return this.mDatabase;
+    }
+
     public DatabaseReference getmDatabase() {
         return mDatabase;
     }
