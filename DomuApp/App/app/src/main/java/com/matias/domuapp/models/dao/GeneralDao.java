@@ -12,6 +12,8 @@ public class GeneralDao {
     this.mDatabase=mDatabase;
     }
 
+    public GeneralDao() {}
+
     public Boolean conexion()
     {
         this.mDatabase = FirebaseDatabase.getInstance(this.uri).getReference();
@@ -25,7 +27,6 @@ public class GeneralDao {
         this.mDatabase = FirebaseDatabase.getInstance(this.uri).getReference();
         return this.mDatabase;
     }
-
     public DatabaseReference getmDatabase() {
         return mDatabase;
     }

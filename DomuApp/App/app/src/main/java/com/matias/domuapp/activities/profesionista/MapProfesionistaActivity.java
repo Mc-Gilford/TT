@@ -23,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -42,15 +43,18 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.matias.domuapp.R;
 import com.matias.domuapp.activities.MainActivity;
 import com.matias.domuapp.activities.cliente.MapClienteActivity;
+import com.matias.domuapp.controller.LocationController;
+import com.matias.domuapp.controller.ProfessionalController;
+import com.matias.domuapp.controller.UserController;
 import com.matias.domuapp.includes.MyToolbar;
 import com.matias.domuapp.providers.AuthProvider;
+import com.matias.domuapp.providers.GeofireProvider;
 
 public class MapProfesionistaActivity extends AppCompatActivity implements OnMapReadyCallback {
-
     private GoogleMap mMap;
     private SupportMapFragment mMapFragment;
     private AuthProvider mAuthProvider;
-
+    private GeofireProvider mGeofireProvider;
     private LocationRequest mLocationRequest;
     private FusedLocationProviderClient mFusedLocation;
     private final static int LOCATION_REQUEST_CODE = 1;
@@ -58,12 +62,17 @@ public class MapProfesionistaActivity extends AppCompatActivity implements OnMap
     private Marker mMarker;
     private Button mButtonConnect;
     private boolean mIsConnect = false;
+    private ProfessionalController professionalController;
+    private UserController userController;
+    private LatLng mCurrentLatLng;
 
     LocationCallback mLocationCallback = new LocationCallback() {
         @Override
         public void onLocationResult(LocationResult locationResult) {
             for (Location location : locationResult.getLocations()) {
                 if (getApplicationContext() != null) {
+                    mCurrentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+
                     if(mMarker != null){
                         mMarker.remove();
                     }
@@ -79,6 +88,8 @@ public class MapProfesionistaActivity extends AppCompatActivity implements OnMap
                                     .zoom(15f)
                                     .build()
                     ));
+
+                    updateLocation();
                 }
             }
         }
@@ -91,16 +102,20 @@ public class MapProfesionistaActivity extends AppCompatActivity implements OnMap
         MyToolbar.show(this, "Profesionista", false);
 
         mAuthProvider = new AuthProvider();
+        //mGeofireProvider = new GeofireProvider();
+
         mFusedLocation = LocationServices.getFusedLocationProviderClient(this);
 
         mMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mMapFragment.getMapAsync(this);
         mButtonConnect = findViewById(R.id.btnConnect);
+        professionalController = new ProfessionalController();
+        userController = new UserController();
         mButtonConnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mIsConnect) {
-                    disconnect();
+                    mIsConnect=professionalController.disconnectProfesional(mFusedLocation,mButtonConnect,mIsConnect,mMarker,mLocationCallback,mAuthProvider,MapProfesionistaActivity.this);
                 }
                 else {
                     startLocation();
@@ -109,11 +124,12 @@ public class MapProfesionistaActivity extends AppCompatActivity implements OnMap
         });
     }
 
-    void logout() {
-        mAuthProvider.logout();
-        Intent intent = new Intent(MapProfesionistaActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
+
+
+    private void updateLocation() {
+        /*if (mAuthProvider.existSession() && mCurrentLatLng != null) {
+            mGeofireProvider.saveLocation(mAuthProvider.getId(), mCurrentLatLng);
+        }*/
     }
 
     @Override
@@ -128,7 +144,8 @@ public class MapProfesionistaActivity extends AppCompatActivity implements OnMap
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         mLocationRequest.setSmallestDisplacement(5);
         startLocation();
-    }
+
+}
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -138,14 +155,15 @@ public class MapProfesionistaActivity extends AppCompatActivity implements OnMap
                 if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                     if (gpsActived()) {
                         mFusedLocation.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
+                        //mMap.setMyLocationEnabled(true);
                     } else {
                         showAlertDialogNOGPS();
                     }
                 } else {
-                    checkLocationPermissions();
+                    userController.checkLocationPermissions(MapProfesionistaActivity.this);
                 }
             } else {
-                checkLocationPermissions();
+                userController.checkLocationPermissions(MapProfesionistaActivity.this);
             }
         }
     }
@@ -158,6 +176,7 @@ public class MapProfesionistaActivity extends AppCompatActivity implements OnMap
                 return;
             }
             mFusedLocation.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
+            //mMap.setMyLocationEnabled(true);
         }
         else {
             showAlertDialogNOGPS();
@@ -185,16 +204,7 @@ public class MapProfesionistaActivity extends AppCompatActivity implements OnMap
         return isActive;
     }
 
-    private void disconnect() {
-        mButtonConnect.setText("Conectarse");
-        mIsConnect = false;
-        if(mMarker != null){
-            mMarker.remove();
-        }
-        if(mFusedLocation != null){
-            mFusedLocation.removeLocationUpdates(mLocationCallback);
-        }
-    }
+
 
     private void startLocation() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -203,17 +213,19 @@ public class MapProfesionistaActivity extends AppCompatActivity implements OnMap
                     mButtonConnect.setText("Desconectarse");
                     mIsConnect = true;
                     mFusedLocation.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
+                    //mMap.setMyLocationEnabled(true);
                 }
                 else {
                     showAlertDialogNOGPS();
                 }
             }
             else {
-                checkLocationPermissions();
+                userController.checkLocationPermissions(MapProfesionistaActivity.this);
             }
         } else {
             if (gpsActived()) {
                 mFusedLocation.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
+                //mMap.setMyLocationEnabled(true);
             }
             else {
                 showAlertDialogNOGPS();
@@ -222,26 +234,7 @@ public class MapProfesionistaActivity extends AppCompatActivity implements OnMap
     }
 
 
-    private void checkLocationPermissions(){
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-                new AlertDialog.Builder(this)
-                        .setTitle("Proporciona los permisos para continuar")
-                        .setMessage("Esta aplicación requiere de los permisos de ubicación para poder utilizarse")
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                ActivityCompat.requestPermissions(MapProfesionistaActivity.this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST_CODE);
-                            }
-                        })
-                        .create()
-                        .show();
-            }
-            else {
-                ActivityCompat.requestPermissions(MapProfesionistaActivity.this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST_CODE);
-            }
-        }
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -252,7 +245,7 @@ public class MapProfesionistaActivity extends AppCompatActivity implements OnMap
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.action_logout) {
-            logout();
+            mIsConnect=professionalController.logoutProfesional(mFusedLocation,mButtonConnect,mIsConnect,mMarker,mLocationCallback,mAuthProvider,MapProfesionistaActivity.this);
         }
         return super.onOptionsItemSelected(item);
     }

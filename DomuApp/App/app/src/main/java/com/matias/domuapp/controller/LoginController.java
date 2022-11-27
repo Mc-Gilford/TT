@@ -23,6 +23,7 @@ public class LoginController {
         {
             mDialog = new SpotsDialog.Builder().setContext(context).setMessage("Espere un momento").build();
             mDialog.show();
+            System.out.println("Login Controller:login "+ user.toString());
             signIn(mAuth,user,mDialog,context);
         }
     }
@@ -31,6 +32,7 @@ public class LoginController {
     @NonNull
     private Boolean signIn(FirebaseAuth mAuth, Usuario user,AlertDialog mDialog, Context context){
         UserDao userDao = new UserDao();
+        System.out.println("Login Controller:signIn "+ user.toString());
         userDao.signIn(mAuth,user,mDialog,context);
         return false;
     }

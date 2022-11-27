@@ -33,6 +33,7 @@ public class ClienteProvider {
         map.put("coordX",cliente.getCoordX());
         map.put("coordY",cliente.getCoordX());
         map.put("professionals",cliente.getProfessionals());
+        map.put("typeUser",cliente.getTypeUser());
         return mDatabase.child(cliente.getId()).setValue(map);
     }
 

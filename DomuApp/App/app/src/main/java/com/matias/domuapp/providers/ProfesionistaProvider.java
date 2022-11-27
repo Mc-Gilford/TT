@@ -37,6 +37,7 @@ public class ProfesionistaProvider {
         map.put("idJob",profesionista.getIdJob());
         map.put("score",profesionista.getScore());
         map.put("qualification",profesionista.getQualification());
+        map.put("typeUser",profesionista.getTypeUser());
         return mDatabase.child(profesionista.getId()).setValue(map);
     }
 

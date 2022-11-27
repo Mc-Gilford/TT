@@ -40,6 +40,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.matias.domuapp.R;
 import com.matias.domuapp.activities.MainActivity;
 import com.matias.domuapp.activities.profesionista.MapProfesionistaActivity;
+import com.matias.domuapp.controller.ClientController;
+import com.matias.domuapp.controller.UserController;
 import com.matias.domuapp.includes.MyToolbar;
 import com.matias.domuapp.providers.AuthProvider;
 
@@ -54,17 +56,39 @@ public class MapClienteActivity extends AppCompatActivity implements OnMapReadyC
     private final static int SETTINGS_REQUEST_CODE = 2;
     private Marker mMarker;
 
+    private ClientController clientController;
+    private UserController userController;
+    private LatLng mCurrentLatLng;
     LocationCallback mLocationCallback = new LocationCallback() {
         @Override
         public void onLocationResult(LocationResult locationResult) {
-            for (Location location : locationResult.getLocations()) {
+
+            for(Location location: locationResult.getLocations()) {
                 if (getApplicationContext() != null) {
+                    if (mMarker != null) {
+                        mMarker.remove();
+                    }
+
+                    mCurrentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+
+                    mMarker = mMap.addMarker(new MarkerOptions().position(
+                                            new LatLng(location.getLatitude(), location.getLongitude())
+                                    )
+                                    .title("Tu posicion")
+                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_pin_blue))
+                    );
+                    // OBTENER LA LOCALIZACION DEL USUARIO EN TIEMPO REAL
                     mMap.moveCamera(CameraUpdateFactory.newCameraPosition(
                             new CameraPosition.Builder()
                                     .target(new LatLng(location.getLatitude(), location.getLongitude()))
                                     .zoom(15f)
                                     .build()
                     ));
+                    /*
+                    if (mIsFirstTime) {
+                        mIsFirstTime = false;
+                        getActiveProfesionist();
+                    }*/
                 }
             }
         }
@@ -79,28 +103,22 @@ public class MapClienteActivity extends AppCompatActivity implements OnMapReadyC
         MyToolbar.show(this, "Cliente", false);
 
         mAuthProvider = new AuthProvider();
+        clientController = new ClientController();
+        userController = new UserController();
         mFusedLocation = LocationServices.getFusedLocationProviderClient(this);
 
         mMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mMapFragment.getMapAsync(this);
+        startLocation();
     }
 
-    void logout() {
-        mAuthProvider.logout();
-        Intent intent = new Intent(MapClienteActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
-    }
+
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         mMap.getUiSettings().setZoomControlsEnabled(true);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        mMap.setMyLocationEnabled(true);
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(1000);
         mLocationRequest.setFastestInterval(1000);
@@ -121,10 +139,10 @@ public class MapClienteActivity extends AppCompatActivity implements OnMapReadyC
                         showAlertDialogNOGPS();
                     }
                 } else {
-                    checkLocationPermissions();
+                    userController.checkLocationPermissions(MapClienteActivity.this);
                 }
             } else {
-                checkLocationPermissions();
+                userController.checkLocationPermissions(MapClienteActivity.this);
             }
         }
     }
@@ -169,13 +187,15 @@ public class MapClienteActivity extends AppCompatActivity implements OnMapReadyC
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 if (gpsActived()) {
                     mFusedLocation.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
+                    System.out.println("Aqui cliente");
                 }
                 else {
                     showAlertDialogNOGPS();
                 }
             }
             else {
-                checkLocationPermissions();
+                userController.checkLocationPermissions(MapClienteActivity.this);
+                System.out.println("Aquino");
             }
         } else {
             if (gpsActived()) {
@@ -187,26 +207,7 @@ public class MapClienteActivity extends AppCompatActivity implements OnMapReadyC
         }
     }
 
-    private void checkLocationPermissions(){
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-                new AlertDialog.Builder(this)
-                        .setTitle("Proporciona los permisos para continuar")
-                        .setMessage("Esta aplicación requiere de los permisos de ubicación para poder utilizarse")
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                ActivityCompat.requestPermissions(MapClienteActivity.this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST_CODE);
-                            }
-                        })
-                        .create()
-                        .show();
-            }
-            else {
-                ActivityCompat.requestPermissions(MapClienteActivity.this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST_CODE);
-            }
-        }
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -217,7 +218,7 @@ public class MapClienteActivity extends AppCompatActivity implements OnMapReadyC
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.action_logout) {
-            logout();
+            clientController.logout(mAuthProvider,MapClienteActivity.this);
         }
         return super.onOptionsItemSelected(item);
     }

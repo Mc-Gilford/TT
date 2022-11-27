@@ -80,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 RegisterController registerController = new RegisterController();
-                final Usuario finalUser=settingUser("Cliente");
+                Usuario finalUser=settingUser("Cliente");
                 System.out.println("Creando Cliente "+ finalUser.toString());
                 registerController.clickRegister(finalUser, mAuthProvider,RegisterActivity.this);
             }
@@ -89,7 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 RegisterController registerController = new RegisterController();
-                final Usuario finalUser=settingUser("Profesional");
+                Usuario finalUser=settingUser("Profesional");
                 System.out.println("Creando Profesional "+ finalUser.toString());
                 registerController.clickRegister(finalUser, mAuthProvider,RegisterActivity.this);
             }
