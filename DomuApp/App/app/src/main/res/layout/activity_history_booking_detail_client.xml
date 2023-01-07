@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".activities.cliente.HistoryBookingDetailClientActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorPrimary">
+
+        <com.github.florent37.shapeofview.shapes.ArcView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:elevation="4dp"
+            app:shape_arc_cropDirection="outside"
+            app:shape_arc_height="20dp"
+            app:shape_arc_position="bottom"
+            >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorSecondary" />
+
+            <TextView
+                android:id="@+id/textViewNameBookingDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombre del profesionista"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_margin="50dp" />
+
+
+        </com.github.florent37.shapeofview.shapes.ArcView>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:src="@drawable/icon_service"
+            android:layout_marginTop="90dp"
+            android:tint="@color/colorSecondary"/>
+
+        <TextView
+            android:id="@+id/textViewOriginHistoryBookingDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Servicio"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:src="@drawable/icon_address"
+            android:layout_marginTop="15dp"
+            android:tint="@color/colorSecondary"/>
+
+        <TextView
+            android:id="@+id/textViewDestinationHistoryBookingDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Ubicación"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="58dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/ic_money_foreground"
+            android:tint="@color/colorSecondary"/>
+
+        <TextView
+            android:id="@+id/textViewCalificationHistoryBookingDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Tu calificacion: 0"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp"
+            android:textSize="16sp" />
+
+
+    </LinearLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/circleImageHistoryBookingDetail"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/man"
+        android:layout_gravity="center|top"
+        app:civ_border_width="5dp"
+        app:civ_border_color="#F0F0F0"
+        android:layout_marginTop="120dp" />
+
+    <RatingBar
+        android:id="@+id/ratingBarHistoryBookingDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:numStars="5"
+        android:isIndicator="true"
+        android:layout_margin="30dp" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/circleImageBack"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/arrow_back_black_foreground"
+        android:layout_gravity="left|top"
+        app:civ_circle_background_color="@color/colorPrimary"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"/>
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

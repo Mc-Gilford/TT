@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.matias.domuapp.activities.RegisterActivity;
@@ -23,6 +25,7 @@ import com.matias.domuapp.models.Profesional;
 import com.matias.domuapp.models.Usuario;
 import com.matias.domuapp.models.dao.GeneralDao;
 import com.matias.domuapp.models.dao.UserDao;
+import com.matias.domuapp.providers.AuthProvider;
 import com.matias.domuapp.providers.ClienteProvider;
 import com.matias.domuapp.providers.ProfesionistaProvider;
 

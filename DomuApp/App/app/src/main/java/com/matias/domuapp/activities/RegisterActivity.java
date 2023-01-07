@@ -43,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
     TextInputEditText mTextInputSecondName;
     TextInputEditText mTextInputBirthday;
     TextInputEditText mTextInputPhone;
-    TextInputEditText mTextInputCountry;
+    TextInputEditText mTextInputDomicilio;
     TextInputEditText mTextInputState;
     TextInputEditText mTextInputColony;
     TextInputEditText mTextInputCity;
@@ -66,13 +66,13 @@ public class RegisterActivity extends AppCompatActivity {
         mTextInputSecondName = findViewById(R.id.textInputSecondName);
         mTextInputBirthday = findViewById(R.id.textInputDate);
         mTextInputPhone = findViewById(R.id.textInputPhone);
-        mTextInputCountry = findViewById(R.id.textInputCountry);
+        mTextInputDomicilio = findViewById(R.id.textInputDomicilio);/*
         mTextInputState = findViewById(R.id.textInputState);
         mTextInputColony = findViewById(R.id.textInputColony);
         mTextInputCity = findViewById(R.id.textInputCity);
         mTextInputStreet = findViewById(R.id.textInputStreet);
         mTextPostalCode = findViewById(R.id.textInputPostalCode);
-        mTextNumber = findViewById(R.id.textInputNumber);
+        mTextNumber = findViewById(R.id.textInputNumber);*/
         mTextInputEmail = findViewById(R.id.textInputEmail);
         mTextInputPassword = findViewById(R.id.textInputPassword);
 
@@ -97,8 +97,9 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-    Usuario settingUser(String type) {
+    private Usuario settingUser(String type) {
         UserController userController = new UserController();
+        RegisterController registerController = new RegisterController();
         Usuario user = userController.typeUser(type);
         Persona person = new Persona();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -117,15 +118,17 @@ public class RegisterActivity extends AppCompatActivity {
         }
         person.setBirthDate(date);
         person.setPhone(mTextInputPhone.getText().toString());
-        direccion.setCountry(mTextInputCountry.getText().toString());
+
+        AddressController addressController = new AddressController();
+        direccion=addressController.getDireccionString(mTextInputDomicilio.getText().toString());
+        /*direccion.setCountry(mTextInputCountry.getText().toString());
         direccion.setState(mTextInputState.getText().toString());
         direccion.setCity(mTextInputCity.getText().toString());
         direccion.setColony(mTextInputColony.getText().toString());
         direccion.setStreet(mTextInputStreet.getText().toString());
-        direccion.setPostalCode(mTextPostalCode.getText().toString());
-        AddressController addressController = new AddressController();
-        int num = addressController.gettingNumberofHouse(mTextNumber.getText().toString());
-        direccion.setNumber(num);
+        direccion.setPostalCode(mTextPostalCode.getText().toString());*/
+
+
         person.setAddress(direccion);
         user.setPerson(person);
         user.setEmail(mTextInputEmail.getText().toString());

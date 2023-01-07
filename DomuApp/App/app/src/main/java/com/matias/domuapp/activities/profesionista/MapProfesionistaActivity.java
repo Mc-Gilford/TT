@@ -40,15 +40,22 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.matias.domuapp.R;
 import com.matias.domuapp.activities.MainActivity;
 import com.matias.domuapp.activities.cliente.MapClienteActivity;
 import com.matias.domuapp.controller.LocationController;
 import com.matias.domuapp.controller.ProfessionalController;
+import com.matias.domuapp.controller.TokenController;
 import com.matias.domuapp.controller.UserController;
 import com.matias.domuapp.includes.MyToolbar;
 import com.matias.domuapp.providers.AuthProvider;
 import com.matias.domuapp.providers.GeofireProvider;
+
+import java.util.logging.Logger;
+import com.google.firebase.database.DataSnapshot;
+
 
 public class MapProfesionistaActivity extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
@@ -65,6 +72,7 @@ public class MapProfesionistaActivity extends AppCompatActivity implements OnMap
     private ProfessionalController professionalController;
     private UserController userController;
     private LatLng mCurrentLatLng;
+    private ValueEventListener mListener;
 
     LocationCallback mLocationCallback = new LocationCallback() {
         @Override
@@ -72,7 +80,7 @@ public class MapProfesionistaActivity extends AppCompatActivity implements OnMap
             for (Location location : locationResult.getLocations()) {
                 if (getApplicationContext() != null) {
                     mCurrentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-
+                    System.out.println("Usuario y Lat"+mAuthProvider.getId()+" "+mCurrentLatLng.toString());
                     if(mMarker != null){
                         mMarker.remove();
                     }
@@ -89,7 +97,7 @@ public class MapProfesionistaActivity extends AppCompatActivity implements OnMap
                                     .build()
                     ));
 
-                    updateLocation();
+                    professionalController.updateLocation(mAuthProvider,mCurrentLatLng);
                 }
             }
         }
@@ -102,7 +110,7 @@ public class MapProfesionistaActivity extends AppCompatActivity implements OnMap
         MyToolbar.show(this, "Profesionista", false);
 
         mAuthProvider = new AuthProvider();
-        //mGeofireProvider = new GeofireProvider();
+        mGeofireProvider = new GeofireProvider();
 
         mFusedLocation = LocationServices.getFusedLocationProviderClient(this);
 
@@ -122,14 +130,16 @@ public class MapProfesionistaActivity extends AppCompatActivity implements OnMap
                 }
             }
         });
+        TokenController tokenController = new TokenController(mAuthProvider.getId());
+        isProfesionistWorking(mFusedLocation,mButtonConnect,mIsConnect,mMarker,mLocationCallback,mAuthProvider,MapProfesionistaActivity.this);
     }
 
-
-
-    private void updateLocation() {
-        /*if (mAuthProvider.existSession() && mCurrentLatLng != null) {
-            mGeofireProvider.saveLocation(mAuthProvider.getId(), mCurrentLatLng);
-        }*/
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mListener != null) {
+            mGeofireProvider.isProfesionistWorking(mAuthProvider.getId()).removeEventListener(mListener);
+        }
     }
 
     @Override
@@ -233,9 +243,6 @@ public class MapProfesionistaActivity extends AppCompatActivity implements OnMap
         }
     }
 
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.profesionista_menu, menu);
@@ -247,6 +254,34 @@ public class MapProfesionistaActivity extends AppCompatActivity implements OnMap
         if (item.getItemId() == R.id.action_logout) {
             mIsConnect=professionalController.logoutProfesional(mFusedLocation,mButtonConnect,mIsConnect,mMarker,mLocationCallback,mAuthProvider,MapProfesionistaActivity.this);
         }
+        if (item.getItemId() == R.id.action_update) {
+            Intent intent = new Intent(MapProfesionistaActivity.this, UpdateProfileProfesionistActivity.class);
+            startActivity(intent);
+        }
+        if (item.getItemId() == R.id.action_history) {
+            Intent intent = new Intent(MapProfesionistaActivity.this, HistoryBookingProfesionistActivity.class);
+            startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void isProfesionistWorking(final FusedLocationProviderClient mFusedLocation, final Button mButtonConnect, final Boolean mIsConnect,
+                                      final Marker mMarker, final LocationCallback mLocationCallback, final AuthProvider mAuthProvider, Context context) {
+        System.out.println("Profesionist is working");
+        mListener = mGeofireProvider.isProfesionistWorking(mAuthProvider.getId()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    //disconnect();
+                    professionalController.disconnectProfesional(mFusedLocation,mButtonConnect,mIsConnect,mMarker,mLocationCallback,mAuthProvider,MapProfesionistaActivity.this);
+                    System.out.println("Reporte de vientos");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

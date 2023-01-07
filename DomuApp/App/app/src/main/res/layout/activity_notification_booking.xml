@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".activities.profesionista.NotificationBookingActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <com.github.florent37.shapeofview.shapes.DiagonalView
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:elevation="4dp"
+                app:shape_diagonal_angle="10"
+                app:shape_diagonal_direction="left"
+                app:shape_diagonal_position="bottom">
+
+                <!-- YOUR CONTENT -->
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary" />
+
+                <ImageView
+                    android:layout_width="144dp"
+                    android:layout_height="136dp"
+                    android:layout_gravity="center|top"
+                    android:layout_margin="30dp"
+                    android:src="@drawable/icon_home" />
+
+            </com.github.florent37.shapeofview.shapes.DiagonalView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Servicio"
+                android:textAlignment="center"
+                android:textSize="22sp"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:id="@+id/textViewOrigin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="17sp"
+                android:layout_marginTop="5dp"
+                android:textColor="@android:color/black"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ubicación"
+                android:textAlignment="center"
+                android:textSize="22sp"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:id="@+id/textViewDestination"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="17sp"
+                android:layout_marginTop="5dp"
+                android:textColor="@android:color/black"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tiempo de llegada"
+                        android:textSize="18sp"
+                        android:textColor="@android:color/black"
+                        />
+
+                    <TextView
+                        android:id="@+id/textViewMin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0 Min"
+                        android:textColor="@android:color/black"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Precio"
+                        android:textSize="18sp"
+                        android:textColor="@android:color/black"
+                        />
+
+                    <TextView
+                        android:id="@+id/textViewDistance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0 $"
+                        android:textColor="@android:color/black"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textViewCounter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="30"
+                android:textAlignment="center"
+                android:textSize="40sp"
+                android:layout_marginTop="25dp"
+                android:textColor="@android:color/black"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        android:layout_margin="20dp">
+
+        <Button
+            android:id="@+id/btnAcceptBooking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ACEPTAR"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/colorGreen"
+            android:textColor="@color/colorWhite"
+            android:layout_marginRight="5dp"/>
+
+        <Button
+            android:id="@+id/btnCancelBooking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RECHAZAR"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/colorRed"
+            android:textColor="@color/colorWhite"
+            android:layout_marginLeft="5dp"/>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

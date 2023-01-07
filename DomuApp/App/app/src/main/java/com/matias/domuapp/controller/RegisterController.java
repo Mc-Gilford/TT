@@ -2,6 +2,7 @@ package com.matias.domuapp.controller;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.matias.domuapp.activities.RegisterActivity;
+import com.matias.domuapp.models.Direccion;
 import com.matias.domuapp.models.Usuario;
 import com.matias.domuapp.providers.AuthProvider;
 import com.matias.domuapp.providers.ClienteProvider;
@@ -54,4 +56,6 @@ public class RegisterController {
             }
         });
     }
+
+
 }

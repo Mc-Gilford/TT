@@ -1,12 +1,12 @@
 package com.matias.domuapp.providers;
 
+import com.firebase.geofire.GeoFire;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.matias.domuapp.models.Cliente;
 import com.matias.domuapp.models.Profesional;
 import com.matias.domuapp.models.Servicio;
-import com.matias.domuapp.models.dao.ClientDao;
 import com.matias.domuapp.models.dao.ProfessionalDao;
 
 import java.util.HashMap;
@@ -14,12 +14,14 @@ import java.util.List;
 import java.util.Map;
 
 public class ProfesionistaProvider {
-    DatabaseReference mDatabase;
+    private DatabaseReference mDatabase;
+    private GeoFire mGeofire;
 
     public ProfesionistaProvider() {
         //mDatabase = FirebaseDatabase.getInstance("https://domu-1-default-rtdb.firebaseio.com/").getReference().child("Users").child("Profesionista");
-        ProfessionalDao clientDao = new ProfessionalDao();
-        mDatabase=clientDao.getmDatabaseProfesionista(mDatabase);
+        ProfessionalDao professionalDao = new ProfessionalDao();
+        mDatabase=professionalDao.getmDatabaseProfesionista(mDatabase);
+        //mGeofire = new GeoFire(mDatabase);
     }
 
     public Task<Void> create(Object object) {
@@ -40,6 +42,7 @@ public class ProfesionistaProvider {
         map.put("typeUser",profesionista.getTypeUser());
         return mDatabase.child(profesionista.getId()).setValue(map);
     }
+
 
 
 }

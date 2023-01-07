@@ -9,4 +9,10 @@ public class ProfessionalDao {
         mDatabase = mDatabase.child("Users").child("Profesionista");
         return mDatabase;
     }
+    public DatabaseReference getmDatabaseProfesionistaIsWorking(DatabaseReference mDatabase,String idProfesionist) {
+        GeneralDao generalDao = new GeneralDao(mDatabase);
+        mDatabase=generalDao.easyConexion(mDatabase);
+        mDatabase = mDatabase.child("profesionist_working").child(idProfesionist);
+        return mDatabase;
+    }
 }
