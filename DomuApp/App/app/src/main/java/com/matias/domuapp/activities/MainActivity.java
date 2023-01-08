@@ -1,74 +1,65 @@
 package com.matias.domuapp.activities;
 
-import android.content.Intent;
+import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.matias.domuapp.R;
-import com.matias.domuapp.activities.cliente.MapClienteActivity;
-import com.matias.domuapp.activities.profesionista.MapProfesionistaActivity;
+import com.matias.domuapp.controller.LoginController;
+import com.matias.domuapp.controller.RegisterController;
+import com.matias.domuapp.models.Usuario;
+import com.matias.domuapp.models.dao.GeneralDao;
 
 public class MainActivity extends AppCompatActivity {
-    Button mButtonProfesionista;
-    Button mButtonCliente;
+    Button mButtonLogin;
+    Button mButtonRegister;
+    TextInputEditText mTextInputEmail;
+    TextInputEditText mTextInputPassword;
+    Usuario user;
     SharedPreferences mPref;
-
+    FirebaseAuth mAuth;
+    DatabaseReference mDatabase;
+    AlertDialog mDialog;
+    LoginController login;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mPref = getApplicationContext().getSharedPreferences("typeUser", MODE_PRIVATE);
-        final SharedPreferences.Editor editor = mPref.edit();
-
-        mButtonProfesionista = findViewById(R.id.btnProfesionista);
-        mButtonCliente = findViewById(R.id.btnCliente);
-
-        mButtonProfesionista.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editor.putString("user", "profesionista");
-                editor.apply();
-                goToSelectAuth();
-            }
-        });
-
-        mButtonCliente.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editor.putString("user", "cliente");
-                editor.apply();
-                goToSelectAuth();
-            }
-        });
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if(FirebaseAuth.getInstance().getCurrentUser() != null){
-            String typeUser = mPref.getString("user", "");
-            if(typeUser.equals("cliente")){
-                Intent intent = new Intent(MainActivity.this, MapClienteActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-
-            }
-            else if(typeUser.equals("profesionista")){
-                Intent intent = new Intent(MainActivity.this, MapProfesionistaActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-            }
+        mButtonLogin = findViewById(R.id.btnLogin);
+        mButtonRegister = findViewById(R.id.btnRegistrar);
+        mTextInputEmail = (TextInputEditText) findViewById(R.id.textInputEmail);
+        mTextInputPassword = (TextInputEditText) findViewById(R.id.textInputPassword);
+        GeneralDao generalDao = new GeneralDao(mDatabase);
+        if(generalDao.conexion()) {
+            mButtonLogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String email = mTextInputEmail.getText().toString();
+                    String password = mTextInputPassword.getText().toString();
+                    login = new LoginController();
+                    user = new Usuario(email, password);
+                    mAuth = FirebaseAuth.getInstance();
+                    login.login(user, mDialog, mAuth, MainActivity.this);
+                }
+            });
+            mButtonRegister.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    RegisterController registerController = new RegisterController();
+                    registerController.goToRegister(MainActivity.this);
+                }
+            });
         }
-    }
-
-    private void goToSelectAuth() {
-        Intent intent = new Intent(MainActivity.this, SelectOptionAuthActivity.class);
-        startActivity(intent);
+        else{
+            Toast.makeText(MainActivity.this, "Fallo en la conexion", Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -23,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -39,18 +40,28 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.matias.domuapp.R;
 import com.matias.domuapp.activities.MainActivity;
 import com.matias.domuapp.activities.cliente.MapClienteActivity;
+import com.matias.domuapp.controller.LocationController;
+import com.matias.domuapp.controller.ProfessionalController;
+import com.matias.domuapp.controller.TokenController;
+import com.matias.domuapp.controller.UserController;
 import com.matias.domuapp.includes.MyToolbar;
 import com.matias.domuapp.providers.AuthProvider;
+import com.matias.domuapp.providers.GeofireProvider;
+
+import java.util.logging.Logger;
+import com.google.firebase.database.DataSnapshot;
+
 
 public class MapProfesionistaActivity extends AppCompatActivity implements OnMapReadyCallback {
-
     private GoogleMap mMap;
     private SupportMapFragment mMapFragment;
     private AuthProvider mAuthProvider;
-
+    private GeofireProvider mGeofireProvider;
     private LocationRequest mLocationRequest;
     private FusedLocationProviderClient mFusedLocation;
     private final static int LOCATION_REQUEST_CODE = 1;
@@ -58,12 +69,18 @@ public class MapProfesionistaActivity extends AppCompatActivity implements OnMap
     private Marker mMarker;
     private Button mButtonConnect;
     private boolean mIsConnect = false;
+    private ProfessionalController professionalController;
+    private UserController userController;
+    private LatLng mCurrentLatLng;
+    private ValueEventListener mListener;
 
     LocationCallback mLocationCallback = new LocationCallback() {
         @Override
         public void onLocationResult(LocationResult locationResult) {
             for (Location location : locationResult.getLocations()) {
                 if (getApplicationContext() != null) {
+                    mCurrentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                    System.out.println("Usuario y Lat"+mAuthProvider.getId()+" "+mCurrentLatLng.toString());
                     if(mMarker != null){
                         mMarker.remove();
                     }
@@ -79,6 +96,8 @@ public class MapProfesionistaActivity extends AppCompatActivity implements OnMap
                                     .zoom(15f)
                                     .build()
                     ));
+
+                    professionalController.updateLocation(mAuthProvider,mCurrentLatLng);
                 }
             }
         }
@@ -91,29 +110,36 @@ public class MapProfesionistaActivity extends AppCompatActivity implements OnMap
         MyToolbar.show(this, "Profesionista", false);
 
         mAuthProvider = new AuthProvider();
+        mGeofireProvider = new GeofireProvider();
+
         mFusedLocation = LocationServices.getFusedLocationProviderClient(this);
 
         mMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mMapFragment.getMapAsync(this);
         mButtonConnect = findViewById(R.id.btnConnect);
+        professionalController = new ProfessionalController();
+        userController = new UserController();
         mButtonConnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mIsConnect) {
-                    disconnect();
+                    mIsConnect=professionalController.disconnectProfesional(mFusedLocation,mButtonConnect,mIsConnect,mMarker,mLocationCallback,mAuthProvider,MapProfesionistaActivity.this);
                 }
                 else {
                     startLocation();
                 }
             }
         });
+        TokenController tokenController = new TokenController(mAuthProvider.getId());
+        isProfesionistWorking(mFusedLocation,mButtonConnect,mIsConnect,mMarker,mLocationCallback,mAuthProvider,MapProfesionistaActivity.this);
     }
 
-    void logout() {
-        mAuthProvider.logout();
-        Intent intent = new Intent(MapProfesionistaActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mListener != null) {
+            mGeofireProvider.isProfesionistWorking(mAuthProvider.getId()).removeEventListener(mListener);
+        }
     }
 
     @Override
@@ -128,7 +154,8 @@ public class MapProfesionistaActivity extends AppCompatActivity implements OnMap
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         mLocationRequest.setSmallestDisplacement(5);
         startLocation();
-    }
+
+}
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -138,14 +165,15 @@ public class MapProfesionistaActivity extends AppCompatActivity implements OnMap
                 if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                     if (gpsActived()) {
                         mFusedLocation.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
+                        //mMap.setMyLocationEnabled(true);
                     } else {
                         showAlertDialogNOGPS();
                     }
                 } else {
-                    checkLocationPermissions();
+                    userController.checkLocationPermissions(MapProfesionistaActivity.this);
                 }
             } else {
-                checkLocationPermissions();
+                userController.checkLocationPermissions(MapProfesionistaActivity.this);
             }
         }
     }
@@ -158,6 +186,7 @@ public class MapProfesionistaActivity extends AppCompatActivity implements OnMap
                 return;
             }
             mFusedLocation.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
+            //mMap.setMyLocationEnabled(true);
         }
         else {
             showAlertDialogNOGPS();
@@ -185,16 +214,7 @@ public class MapProfesionistaActivity extends AppCompatActivity implements OnMap
         return isActive;
     }
 
-    private void disconnect() {
-        mButtonConnect.setText("Conectarse");
-        mIsConnect = false;
-        if(mMarker != null){
-            mMarker.remove();
-        }
-        if(mFusedLocation != null){
-            mFusedLocation.removeLocationUpdates(mLocationCallback);
-        }
-    }
+
 
     private void startLocation() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -203,42 +223,22 @@ public class MapProfesionistaActivity extends AppCompatActivity implements OnMap
                     mButtonConnect.setText("Desconectarse");
                     mIsConnect = true;
                     mFusedLocation.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
+                    //mMap.setMyLocationEnabled(true);
                 }
                 else {
                     showAlertDialogNOGPS();
                 }
             }
             else {
-                checkLocationPermissions();
+                userController.checkLocationPermissions(MapProfesionistaActivity.this);
             }
         } else {
             if (gpsActived()) {
                 mFusedLocation.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
+                //mMap.setMyLocationEnabled(true);
             }
             else {
                 showAlertDialogNOGPS();
-            }
-        }
-    }
-
-
-    private void checkLocationPermissions(){
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-                new AlertDialog.Builder(this)
-                        .setTitle("Proporciona los permisos para continuar")
-                        .setMessage("Esta aplicación requiere de los permisos de ubicación para poder utilizarse")
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                ActivityCompat.requestPermissions(MapProfesionistaActivity.this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST_CODE);
-                            }
-                        })
-                        .create()
-                        .show();
-            }
-            else {
-                ActivityCompat.requestPermissions(MapProfesionistaActivity.this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST_CODE);
             }
         }
     }
@@ -252,8 +252,36 @@ public class MapProfesionistaActivity extends AppCompatActivity implements OnMap
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.action_logout) {
-            logout();
+            mIsConnect=professionalController.logoutProfesional(mFusedLocation,mButtonConnect,mIsConnect,mMarker,mLocationCallback,mAuthProvider,MapProfesionistaActivity.this);
+        }
+        if (item.getItemId() == R.id.action_update) {
+            Intent intent = new Intent(MapProfesionistaActivity.this, UpdateProfileProfesionistActivity.class);
+            startActivity(intent);
+        }
+        if (item.getItemId() == R.id.action_history) {
+            Intent intent = new Intent(MapProfesionistaActivity.this, HistoryBookingProfesionistActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void isProfesionistWorking(final FusedLocationProviderClient mFusedLocation, final Button mButtonConnect, final Boolean mIsConnect,
+                                      final Marker mMarker, final LocationCallback mLocationCallback, final AuthProvider mAuthProvider, Context context) {
+        System.out.println("Profesionist is working");
+        mListener = mGeofireProvider.isProfesionistWorking(mAuthProvider.getId()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    //disconnect();
+                    professionalController.disconnectProfesional(mFusedLocation,mButtonConnect,mIsConnect,mMarker,mLocationCallback,mAuthProvider,MapProfesionistaActivity.this);
+                    System.out.println("Reporte de vientos");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

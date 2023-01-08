@@ -1,28 +1,31 @@
-package com.matias.domuapp.activities.cliente;
+package com.matias.domuapp.activities;
 
 import android.app.AlertDialog;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 import com.matias.domuapp.R;
-import com.matias.domuapp.activities.profesionista.MapProfesionistaActivity;
-import com.matias.domuapp.activities.profesionista.RegisterProfesionistaActivity;
+import com.matias.domuapp.controller.AddressController;
+import com.matias.domuapp.controller.RegisterController;
+import com.matias.domuapp.controller.UserController;
 import com.matias.domuapp.includes.MyToolbar;
 import com.matias.domuapp.models.Cliente;
+import com.matias.domuapp.models.Direccion;
+import com.matias.domuapp.models.Persona;
+import com.matias.domuapp.models.Usuario;
 import com.matias.domuapp.providers.AuthProvider;
 import com.matias.domuapp.providers.ClienteProvider;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import dmax.dialog.SpotsDialog;
 
@@ -32,42 +35,112 @@ public class RegisterActivity extends AppCompatActivity {
     ClienteProvider mClienteProvider;
     AlertDialog mDialog;
 
-    Button mButtonRegister;
-    TextInputEditText mTextInputEmail;
+    Button mButtonRegisterCliente;
+    Button mButtonRegisterProfesional;
+
     TextInputEditText mTextInputName;
+    TextInputEditText mTextInputLastName;
+    TextInputEditText mTextInputSecondName;
+    TextInputEditText mTextInputBirthday;
+    TextInputEditText mTextInputPhone;
+    TextInputEditText mTextInputDomicilio;
+    TextInputEditText mTextInputState;
+    TextInputEditText mTextInputColony;
+    TextInputEditText mTextInputCity;
+    TextInputEditText mTextInputStreet;
+    TextInputEditText mTextPostalCode;
+    TextInputEditText mTextNumber;
+    TextInputEditText mTextInputEmail;
     TextInputEditText mTextInputPassword;
-    TextInputEditText mTextInputAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
         mDialog = new SpotsDialog.Builder().setContext(RegisterActivity.this).setMessage("Espere un momento").build();
-
-
-        MyToolbar.show(this, "Registro de usuario", true);
         mAuthProvider = new AuthProvider();
-        mClienteProvider = new ClienteProvider();
-
-
-        mButtonRegister = findViewById(R.id.btnRegister);
-        mTextInputEmail = findViewById(R.id.textInputEmail);
+        mButtonRegisterCliente = findViewById(R.id.btnRegister);
+        mButtonRegisterProfesional = findViewById(R.id.btnRegisterProfessional);
         mTextInputName = findViewById(R.id.textInputName);
+        mTextInputLastName = findViewById(R.id.textInputLastName);
+        mTextInputSecondName = findViewById(R.id.textInputSecondName);
+        mTextInputBirthday = findViewById(R.id.textInputDate);
+        mTextInputPhone = findViewById(R.id.textInputPhone);
+        mTextInputDomicilio = findViewById(R.id.textInputDomicilio);/*
+        mTextInputState = findViewById(R.id.textInputState);
+        mTextInputColony = findViewById(R.id.textInputColony);
+        mTextInputCity = findViewById(R.id.textInputCity);
+        mTextInputStreet = findViewById(R.id.textInputStreet);
+        mTextPostalCode = findViewById(R.id.textInputPostalCode);
+        mTextNumber = findViewById(R.id.textInputNumber);*/
+        mTextInputEmail = findViewById(R.id.textInputEmail);
         mTextInputPassword = findViewById(R.id.textInputPassword);
-        mTextInputAddress = findViewById(R.id.textInputAddress);
 
-        mButtonRegister.setOnClickListener(new View.OnClickListener() {
+        mButtonRegisterCliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickRegister();
+                RegisterController registerController = new RegisterController();
+                Usuario finalUser=settingUser("Cliente");
+                System.out.println("Creando Cliente "+ finalUser.toString());
+                registerController.clickRegister(finalUser, mAuthProvider,RegisterActivity.this);
             }
         });
-
+        mButtonRegisterProfesional.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RegisterController registerController = new RegisterController();
+                Usuario finalUser=settingUser("Profesional");
+                System.out.println("Creando Profesional "+ finalUser.toString());
+                registerController.clickRegister(finalUser, mAuthProvider,RegisterActivity.this);
+            }
+        });
     }
 
-    void clickRegister() {
-        final String name = mTextInputName.getText().toString();
+
+    private Usuario settingUser(String type) {
+        UserController userController = new UserController();
+        RegisterController registerController = new RegisterController();
+        Usuario user = userController.typeUser(type);
+        Persona person = new Persona();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = null;
+        Direccion direccion = new Direccion();
+        person.setName(mTextInputName.getText().toString());
+        person.setLastname(mTextInputLastName.getText().toString());
+        person.setSecondname(mTextInputSecondName.getText().toString());
+        try {
+            date = dateFormat.parse(mTextInputBirthday.getText().toString());
+        } catch (ParseException e) {
+            mDialog.setMessage("Error con el formato de fecha de nacimiento");
+            mDialog.show();
+            mDialog.hide();
+            e.printStackTrace();
+        }
+        person.setBirthDate(date);
+        person.setPhone(mTextInputPhone.getText().toString());
+
+        AddressController addressController = new AddressController();
+        direccion=addressController.getDireccionString(mTextInputDomicilio.getText().toString());
+        /*direccion.setCountry(mTextInputCountry.getText().toString());
+        direccion.setState(mTextInputState.getText().toString());
+        direccion.setCity(mTextInputCity.getText().toString());
+        direccion.setColony(mTextInputColony.getText().toString());
+        direccion.setStreet(mTextInputStreet.getText().toString());
+        direccion.setPostalCode(mTextPostalCode.getText().toString());*/
+
+
+        person.setAddress(direccion);
+        user.setPerson(person);
+        user.setEmail(mTextInputEmail.getText().toString());
+        user.setPassword(mTextInputPassword.getText().toString());
+        user.setTypeUser(type);
+        System.out.println(user.toString());
+        return user;
+    }
+
+
+   /* void clickRegister() {
+        /*final String name = mTextInputName.getText().toString();
         final String email = mTextInputEmail.getText().toString();
         final String password = mTextInputPassword.getText().toString();
         final String address = mTextInputAddress.getText().toString();
@@ -75,7 +148,7 @@ public class RegisterActivity extends AppCompatActivity {
         if(!name.isEmpty() && !email.isEmpty() && !password.isEmpty() && !address.isEmpty()){
             if (password.length() >= 6){
                 mDialog.show();
-                register(name, email, password, address);
+                //register(name, email, password, address);
 
             }
             else{
@@ -86,7 +159,7 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(this, "Ingrese todos los campos", Toast.LENGTH_SHORT).show();
         }
     }
-
+    /*
     void register(final String name, final String email, String password, final String domicilio){
         mAuthProvider.register(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -95,7 +168,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if (task.isSuccessful()){
                     String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
                     Cliente cliente = new Cliente(id, name, email,domicilio);
-                    create(cliente);
+                    create(cliente);gi
                 }
                 else{
                     Toast.makeText(RegisterActivity.this, "Hubo un error al registrar usuario", Toast.LENGTH_SHORT).show();
@@ -122,7 +195,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-    /*void saveUser(String id, String name, String email) {
+    void saveUser(String id, String name, String email) {
         String selectedUser = mPref.getString("user", "");
         User user = new User();
         user.setEmail(email);
@@ -156,5 +229,5 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     }
-     */
+    */
 }

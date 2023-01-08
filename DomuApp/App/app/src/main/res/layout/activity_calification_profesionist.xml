@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".activities.cliente.CalificationProfesionistActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SERVICIO FINALIZADO"
+            android:textAlignment="center"
+            android:textSize="22sp"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="20dp"/>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:lottie_imageAssetsFolder="assets"
+            app:lottie_fileName="782-check-mark-success.json"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SERVICIO"
+            android:textAlignment="center"
+            android:textSize="22sp"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/textViewOriginCalification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textAlignment="center"
+            android:textSize="17sp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/colorWhite"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="UBICACIÓN"
+            android:textAlignment="center"
+            android:textSize="22sp"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/textViewDestinationCalification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textAlignment="center"
+            android:textSize="17sp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/colorWhite"/>
+
+        <RatingBar
+            android:id="@+id/ratingbarCalification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnCalification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/rounded_button"
+        android:text="CALIFICAR PROFESIONISTA"
+        android:backgroundTint="@color/colorSecondary"
+        android:textColor="@color/colorWhite"
+        android:layout_margin="20dp" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

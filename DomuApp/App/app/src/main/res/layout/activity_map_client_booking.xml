@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/colorSecondary"
+    tools:context=".activities.cliente.MapClientBookingActivity">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:contentPadding="15dp"
+        android:layout_margin="20dp"
+        app:cardBackgroundColor="@color/colorSecondary"
+        app:cardCornerRadius="20dp"
+        >
+
+        <TextView
+            android:id="@+id/textViewStatusBooking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Estado"
+            android:textColor="@color/colorWhite"/>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <fragment
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="150dp"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        />
+
+
+    <com.github.florent37.shapeofview.shapes.BubbleView
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        app:shape_bubble_arrowHeight="15dp"
+        app:shape_bubble_arrowWidth="15dp"
+        app:shape_bubble_arrowPosition="top"
+        app:shape_bubble_borderRadius="20dp"
+        android:layout_gravity="bottom"
+        >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorSecondary" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageViewClientBooking"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/man"
+                android:layout_gravity="center"
+                app:civ_border_width="3dp"
+                app:civ_border_color="@color/colorWhite"
+                android:layout_marginLeft="9dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="7dp"
+                >
+
+                <TextView
+                    android:id="@+id/textViewOriginProfesionistBooking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Servicio"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:maxLines="2"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/textViewDestinationProfesionistBooking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ubicación"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/colorWhite"
+                    android:maxLines="2"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/textViewProfesionistBooking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre del profesionista"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/colorWhite"
+                    android:layout_marginTop="5dp"
+                    android:maxLines="1"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/textViewEmailProfesionistBooking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email del usuario"
+                    android:textColor="@color/colorWhite"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:maxLines="1"
+                    android:textSize="16sp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.github.florent37.shapeofview.shapes.BubbleView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

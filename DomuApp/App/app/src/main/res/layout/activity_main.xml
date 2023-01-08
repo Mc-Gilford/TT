@@ -1,72 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@color/colorPrimary"
-    tools:context=".activities.MainActivity">
+    tools:context=".activities.MainActivity"
+    android:background="@color/colorPrimary">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
-
+        android:orientation="vertical">
         <ImageView
-            android:layout_width="180dp"
-            android:layout_height="180dp"
+            android:layout_width="290dp"
+            android:layout_height="418dp"
+            android:layout_marginBottom="8dp"
             android:src="@drawable/icon_home"
-            android:layout_marginTop="50dp"
             android:layout_gravity="center"/>
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="40dp"
-            android:text="Domu servicios profesionales a domicilio"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-
-
+            android:orientation="horizontal"
+            android:layout_margin="10dp">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintTextAppearance="@color/colorWhite"
+                android:textColorHint="@color/colorWhite"
+                app:boxStrokeColor="@color/colorWhite">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#fff"
+                    android:hint="Correo electronico"
+                    android:inputType="textEmailAddress"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#E4E4E4">
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="10dp">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_height="wrap_content"
+                app:hintTextAppearance="@color/colorWhite"
+                android:textColorHint="@color/colorWhite"
+                app:boxStrokeColor="@color/colorWhite">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#fff"
+                    android:hint="Contraseña"
+                    android:inputType="textPassword"
+                    android:textColor="#FFFFFF"
+                    android:textColorHighlight="@color/colorSecondary"
+                    android:backgroundTint="#E4E4E4">
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="bottom"
-            android:layout_margin="30dp">
-
+            android:orientation="vertical"
+            android:gravity="bottom">
             <Button
-                android:id="@+id/btnProfesionista"
-                android:layout_width="0dp"
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_weight="1"
+                android:layout_margin="10dp"
                 android:background="@drawable/rounded_button"
-                android:backgroundTint="@color/colorBlue"
-                android:text="SOY
-                PROFESIONISTA"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
-
-
+                android:backgroundTint="@color/colorSecondary"
+                android:text="INGRESAR"
+                android:textColor="@color/colorWhite" />
             <Button
-                android:id="@+id/btnCliente"
-                android:layout_width="0dp"
+                android:id="@+id/btnRegistrar"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_weight="1"
+                android:layout_margin="10dp"
                 android:background="@drawable/rounded_button"
-                android:backgroundTint="@color/white"
-                android:text="SOY \nCLIENTE"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
+                android:backgroundTint="@color/colorSecondary"
+                android:text="Registrar"
+                android:textColor="@color/colorWhite" />
         </LinearLayout>
-
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
