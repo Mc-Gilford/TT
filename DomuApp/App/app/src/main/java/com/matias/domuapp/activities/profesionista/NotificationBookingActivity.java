@@ -76,6 +76,7 @@ public class NotificationBookingActivity extends AppCompatActivity {
         mbuttonAccept = findViewById(R.id.btnAcceptBooking);
         mbuttonCancel = findViewById(R.id.btnCancelBooking);
         mExtraIdClient = getIntent().getStringExtra("idClient");
+        System.out.println("Booking Activity "+mExtraIdClient);
         mExtraOrigin = getIntent().getStringExtra("origin");
         mExtraDestination = getIntent().getStringExtra("destination");
         mExtraMin = getIntent().getStringExtra("min");

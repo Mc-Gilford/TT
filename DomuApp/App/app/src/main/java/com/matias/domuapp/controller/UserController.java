@@ -8,15 +8,21 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
 import android.util.Log;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.matias.domuapp.activities.RegisterActivity;
 import com.matias.domuapp.activities.cliente.MapClienteActivity;
 import com.matias.domuapp.activities.profesionista.MapProfesionistaActivity;
@@ -28,6 +34,7 @@ import com.matias.domuapp.models.dao.UserDao;
 import com.matias.domuapp.providers.AuthProvider;
 import com.matias.domuapp.providers.ClienteProvider;
 import com.matias.domuapp.providers.ProfesionistaProvider;
+import com.squareup.picasso.Picasso;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -168,6 +175,61 @@ public class UserController {
                 ActivityCompat.requestPermissions((Activity) context, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST_CODE);
             }
         }
+    }
+
+    public void getUser(String Identifier, String type, final Context context, final ImageView mImageViewBooking, final TextView mTextViewUserBooking,
+                          final TextView mTextViewEmailUserBooking, final TextView mTextViewDestinationUserBooking) {
+        UserDao userDao = new UserDao();
+        System.out.println("MapBookingActivity");
+        if(type.compareTo("profesionista")==0){
+            System.out.println("Cliente consulta");
+            ClienteProvider clienteProvider = new ClienteProvider();
+            mTextViewDestinationUserBooking.setText("Servicio: " + "Cliente");
+            userDao.getUser(Identifier, clienteProvider.getmDatabase()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        System.out.println("Get profesionist");
+                        getUserInformation(dataSnapshot,context,mImageViewBooking,mTextViewUserBooking,mTextViewEmailUserBooking);
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {}
+            });
+        }else if(type.compareTo("cliente")==0){
+            System.out.println("Profesionista consulta");
+            ProfesionistaProvider profesionistaProvider = new ProfesionistaProvider();
+            mTextViewDestinationUserBooking.setText("Servicio: " + "Veterinario");
+            userDao.getUser(Identifier,profesionistaProvider.getmDatabase());
+            userDao.getUser(Identifier, profesionistaProvider.getmDatabase()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        System.out.println("Get client");
+                        getUserInformation(dataSnapshot,context,mImageViewBooking,mTextViewUserBooking,mTextViewEmailUserBooking);
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {}
+            });
+        }else{
+            Toast.makeText(context, "Llenar el tipo de usuario", Toast.LENGTH_SHORT).show();
+            //return null;
+        }
+    }
+    public void getUserInformation(DataSnapshot dataSnapshot, Context context, ImageView mImageViewBooking, TextView mTextViewUserBooking, TextView mTextViewEmailUserBooking){
+        String name = dataSnapshot.child("person").child("name").getValue().toString();
+        String lastname = dataSnapshot.child("person").child("lastname").getValue().toString();
+        String secondname = dataSnapshot.child("person").child("secondname").getValue().toString();
+        String email = dataSnapshot.child("email").getValue().toString();
+        String image = "";
+        if (dataSnapshot.hasChild("image")) {
+            image = dataSnapshot.child("image").getValue().toString();
+            Picasso.with(context).load(image).into(mImageViewBooking);
+        }
+        mTextViewUserBooking.setText(name+" "+lastname+" "+secondname);
+        mTextViewEmailUserBooking.setText(email);
+        System.out.println("Get information "+name+" "+email);
     }
 
 

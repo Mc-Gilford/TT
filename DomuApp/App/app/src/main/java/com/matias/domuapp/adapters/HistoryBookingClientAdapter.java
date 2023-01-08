@@ -42,12 +42,16 @@ public class HistoryBookingClientAdapter extends FirebaseRecyclerAdapter<History
         holder.textViewOrigin.setText(historyBooking.getOrigin());
         holder.textViewDestination.setText(historyBooking.getDestination());
         holder.textViewCalification.setText(String.valueOf(historyBooking.getCalificationClient()));
-        /*mProfesionistProvider.getProfesionist(historyBooking.getIdProfesionist()).addListenerForSingleValueEvent(new ValueEventListener() {
+        System.out.println("HistoryBooking Adapter "+mProfesionistProvider);
+        System.out.println(historyBooking.getIdProfesionist());
+        mProfesionistProvider.getProfesionist(historyBooking.getIdProfesionist()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    String name = dataSnapshot.child("name").getValue().toString();
-                    holder.textViewName.setText(name);
+                    String name = dataSnapshot.child("person").child("name").getValue().toString();
+                    String lastname = dataSnapshot.child("person").child("lastname").getValue().toString();
+                    String secondname = dataSnapshot.child("person").child("secondname").getValue().toString();
+                    holder.textViewName.setText(name+" "+lastname+" "+secondname);
                     if (dataSnapshot.hasChild("image")) {
                         String image = dataSnapshot.child("image").getValue().toString();
                         Picasso.with(mContext).load(image).into(holder.imageViewHistoryBooking);
@@ -59,7 +63,7 @@ public class HistoryBookingClientAdapter extends FirebaseRecyclerAdapter<History
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });*/
+        });
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

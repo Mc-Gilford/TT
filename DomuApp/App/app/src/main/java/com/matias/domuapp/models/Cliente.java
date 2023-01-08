@@ -3,6 +3,15 @@ package com.matias.domuapp.models;
 import java.util.List;
 
 public class Cliente extends Usuario {
+    String image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     @Override
     public String toString() {

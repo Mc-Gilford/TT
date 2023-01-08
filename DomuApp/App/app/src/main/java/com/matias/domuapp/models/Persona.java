@@ -38,7 +38,9 @@ public class Persona {
                 ", data=" + data +
                 '}';
     }
-
+    public String getFullName(){
+        return getName()+" "+getLastname()+" "+getSecondname();
+    }
     public void setId(Integer id) {
         this.id = id;
     }

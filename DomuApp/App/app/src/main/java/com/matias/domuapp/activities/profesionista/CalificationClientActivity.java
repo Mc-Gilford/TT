@@ -1,4 +1,4 @@
-package com.matias.domuapp.activities.cliente;
+package com.matias.domuapp.activities.profesionista;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,21 +18,20 @@ import com.google.firebase.database.ValueEventListener;
 import com.matias.domuapp.R;
 import com.matias.domuapp.models.ClientBooking;
 import com.matias.domuapp.models.HistoryBooking;
-import com.matias.domuapp.providers.AuthProvider;
 import com.matias.domuapp.providers.ClientBookingProvider;
 import com.matias.domuapp.providers.HistoryBookingProvider;
 
 import java.util.Date;
 
-public class CalificationProfesionistActivity extends AppCompatActivity {
-
+public class CalificationClientActivity extends AppCompatActivity {
     private TextView mTextViewOrigin;
     private TextView mTextViewDestination;
     private RatingBar mRatinBar;
     private Button mButtonCalification;
 
     private ClientBookingProvider mClientBookingProvider;
-    private AuthProvider mAuthProvider;
+
+    private String mExtraClientId;
 
     private HistoryBooking mHistoryBooking;
     private HistoryBookingProvider mHistoryBookingProvider;
@@ -42,8 +41,7 @@ public class CalificationProfesionistActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calification_profesionist);
-
+        setContentView(R.layout.activity_calification_client);
         mTextViewDestination = findViewById(R.id.textViewDestinationCalification);
         mTextViewOrigin = findViewById(R.id.textViewOriginCalification);
         mRatinBar = findViewById(R.id.ratingbarCalification);
@@ -51,7 +49,8 @@ public class CalificationProfesionistActivity extends AppCompatActivity {
 
         mClientBookingProvider = new ClientBookingProvider();
         mHistoryBookingProvider = new HistoryBookingProvider();
-        mAuthProvider = new AuthProvider();
+
+        mExtraClientId = getIntent().getStringExtra("idClient");
 
         mRatinBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -70,11 +69,12 @@ public class CalificationProfesionistActivity extends AppCompatActivity {
     }
 
     private void getClientBooking() {
-        mClientBookingProvider.getClientBooking(mAuthProvider.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
+        mClientBookingProvider.getClientBooking(mExtraClientId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     ClientBooking clientBooking = dataSnapshot.getValue(ClientBooking.class);
+                    //mTextViewOrigin.setText(clientBooking.getOrigin());
                     mTextViewOrigin.setText("Veterinario");
                     mTextViewDestination.setText(clientBooking.getDestination());
                     mHistoryBooking = new HistoryBooking(
@@ -98,33 +98,33 @@ public class CalificationProfesionistActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-
         });
     }
 
     private void calificate() {
-        if (mCalification > 0) {
-            mHistoryBooking.setCalificationProfesionist(mCalification);
+        if (mCalification  > 0) {
+            mHistoryBooking.setCalificationClient(mCalification);
             mHistoryBooking.setTimestamp(new Date().getTime());
             mHistoryBookingProvider.getHistoryBooking(mHistoryBooking.getIdHistoryBooking()).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
-                        mHistoryBookingProvider.updateCalificactionProfesionist(mHistoryBooking.getIdHistoryBooking(), mCalification).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        mHistoryBookingProvider.updateCalificactionClient(mHistoryBooking.getIdHistoryBooking(), mCalification).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(CalificationProfesionistActivity.this, "La calificacion se guardo correctamente", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(CalificationProfesionistActivity.this, MapClienteActivity.class);
+                                Toast.makeText(CalificationClientActivity.this, "La calificacion se guardo correctamente", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(CalificationClientActivity.this, MapProfesionistaActivity.class);
                                 startActivity(intent);
                                 finish();
                             }
                         });
-                    } else {
+                    }
+                    else {
                         mHistoryBookingProvider.create(mHistoryBooking).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(CalificationProfesionistActivity.this, "La calificacion se guardo correctamente", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(CalificationProfesionistActivity.this, MapClienteActivity.class);
+                                Toast.makeText(CalificationClientActivity.this, "La calificacion se guardo correctamente", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(CalificationClientActivity.this, MapProfesionistaActivity.class);
                                 startActivity(intent);
                                 finish();
                             }
@@ -139,7 +139,8 @@ public class CalificationProfesionistActivity extends AppCompatActivity {
             });
 
 
-        } else {
+        }
+        else {
             Toast.makeText(this, "Debes ingresar la calificacion", Toast.LENGTH_SHORT).show();
         }
     }

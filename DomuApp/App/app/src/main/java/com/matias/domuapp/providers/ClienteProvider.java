@@ -36,6 +36,18 @@ public class ClienteProvider {
         map.put("typeUser",cliente.getTypeUser());
         return mDatabase.child(cliente.getId()).setValue(map);
     }
+    public Task<Void> update(Cliente client) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("person", client.getPerson());
+        map.put("image", client.getImage());
+        return mDatabase.child(client.getId()).updateChildren(map);
+    }
 
+    public DatabaseReference getmDatabase() {
+        return mDatabase;
+    }
 
+    public DatabaseReference getClient(String idClient) {
+        return mDatabase.child(idClient);
+    }
 }

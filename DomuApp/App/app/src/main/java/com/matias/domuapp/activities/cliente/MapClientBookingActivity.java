@@ -190,17 +190,17 @@ public class MapClientBookingActivity extends AppCompatActivity implements OnMap
                     mOriginLatLng = new LatLng(originLat, originLng);
                     mDestinationLatLng = new LatLng(destinatioLat, destinatioLng);
                     mTextViewOriginClientBooking.setText("Ubicacion en: " + origin);
-                    mTextViewDestinationClientBooking.setText("Servicio: " + "Veterinario");
+                    mTextViewDestinationClientBooking.setText("Servicio: ");
                     //mMap.addMarker(new MarkerOptions().position(mOriginLatLng).title("Ubicación Profesionista").icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_ubicacion)));
-                    getProfesionist(idProfesionist);
+                    //getProfesionist(idProfesionist);
+                    userController = new UserController();
+                    userController.getUser(idProfesionist,"cliente", MapClientBookingActivity.this, mImageViewBooking,
+                            mTextViewClientBooking, mTextViewEmailClientBooking,mTextViewDestinationClientBooking);
                     getProfesionistLocation(idProfesionist);
                 }
             }
-
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
 
     }

@@ -28,8 +28,11 @@ import com.matias.domuapp.activities.cliente.RequestProfesionistActivity;
 import com.matias.domuapp.activities.profesionista.MapProfesionistBookingActivity;
 import com.matias.domuapp.activities.profesionista.MapProfesionistaActivity;
 import com.matias.domuapp.activities.profesionista.NotificationBookingActivity;
+import com.matias.domuapp.models.Persona;
+import com.matias.domuapp.models.Profesional;
 import com.matias.domuapp.providers.AuthProvider;
 import com.matias.domuapp.providers.ClientBookingProvider;
+import com.matias.domuapp.providers.ClienteProvider;
 import com.matias.domuapp.providers.GeofireProvider;
 import com.matias.domuapp.providers.ProfesionistaProvider;
 
@@ -38,8 +41,10 @@ import android.os.Handler;
 
 public class ProfessionalController {
     private GeofireProvider mGeofireProvider;
+    Persona persona;
     public ProfessionalController(){
         mGeofireProvider = new GeofireProvider();
+        persona = new Persona();
     }
     public Boolean disconnectProfesional(FusedLocationProviderClient mFusedLocation, Button mButtonConnect, Boolean mIsConnect,
                                          Marker mMarker, LocationCallback mLocationCallback, AuthProvider mAuthProvider, Context context){
@@ -113,7 +118,7 @@ public class ProfessionalController {
 
         mClientBookingProvider = new ClientBookingProvider();
         mClientBookingProvider.updateStatus(mExtraIdClient, "accept");
-
+        System.out.println("Profesional controller "+mExtraIdClient);
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         manager.cancel(2);
 
@@ -132,5 +137,23 @@ public class ProfessionalController {
         Intent intent = new Intent(context, MapProfesionistaActivity.class);
         context.startActivity(intent);
         ((Activity)context).finish();
+    }
+    public String getProfesional(String idCliente){
+        ProfesionistaProvider profesionistaProvider = new ProfesionistaProvider();
+
+        profesionistaProvider.getProfesionist(idCliente).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    persona.setName(dataSnapshot.child("name").getValue().toString());
+                    persona.setLastname(dataSnapshot.child("lastname").getValue().toString());
+                    persona.setSecondname(dataSnapshot.child("secondname").getValue().toString());
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        return persona.getFullName();
     }
 }

@@ -8,6 +8,7 @@ import com.matias.domuapp.models.Cliente;
 import com.matias.domuapp.models.Profesional;
 import com.matias.domuapp.models.Servicio;
 import com.matias.domuapp.models.dao.ProfessionalDao;
+import com.matias.domuapp.models.dao.UserDao;
 
 import java.util.HashMap;
 import java.util.List;
@@ -40,9 +41,23 @@ public class ProfesionistaProvider {
         map.put("score",profesionista.getScore());
         map.put("qualification",profesionista.getQualification());
         map.put("typeUser",profesionista.getTypeUser());
+        map.put("servicio",profesionista.getServicio());
+        map.put("image",profesionista.getServicio());
         return mDatabase.child(profesionista.getId()).setValue(map);
     }
 
+    public DatabaseReference getmDatabase() {
+        return mDatabase;
+    }
+    public DatabaseReference getProfesionist(String idProfesionist) {
+        return mDatabase.child(idProfesionist);
+    }
 
-
+    public Task<Void> update(Profesional profesionist) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("person", profesionist.getPerson());
+        map.put("image", profesionist.getImage());
+        map.put("servicio", profesionist.getServicio());
+        return mDatabase.child(profesionist.getId()).updateChildren(map);
+    }
 }

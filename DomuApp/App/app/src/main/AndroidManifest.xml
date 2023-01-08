@@ -17,14 +17,14 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".activities.cliente.CalificationProfesionistActivity"
+            android:name=".activities.profesionista.CalificationClientActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".activities.cliente.CalificationClientActivity"
+            android:name=".activities.cliente.CalificationProfesionistActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

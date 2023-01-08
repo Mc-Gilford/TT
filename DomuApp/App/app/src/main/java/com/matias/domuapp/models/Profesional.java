@@ -7,15 +7,43 @@ public class Profesional extends Usuario {
     private String idJob;/*La cedula profesional del profesional*/
     private Float score;
     private List<Integer> qualification; /*Calificaciones por usuarios*/
+    private String Specialization;
+    private String image;
+    private String Servicio;
+
+    public String getServicio() {
+        return Servicio;
+    }
+
+    public void setServicio(String servicio) {
+        Servicio = servicio;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     @Override
     public String toString() {
-        return super.toString()+"Profesional{" +
+        return "Profesional{" +
                 "services=" + services +
                 ", idJob='" + idJob + '\'' +
                 ", score=" + score +
                 ", qualification=" + qualification +
+                ", Specialization='" + Specialization + '\'' +
                 '}';
+    }
+
+    public String getSpecialization() {
+        return Specialization;
+    }
+
+    public void setSpecialization(String specialization) {
+        Specialization = specialization;
     }
 
     public Profesional(){

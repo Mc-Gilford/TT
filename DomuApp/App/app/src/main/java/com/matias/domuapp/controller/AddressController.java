@@ -25,14 +25,14 @@ public class AddressController {
         System.out.println(datos[2]);
         System.out.println(datos[3]);
         System.out.println(datos[4]);
-        System.out.println(datos[5]);
+        //System.out.println(datos[5]);
         direccion.setCountry("Mexico");
         direccion.setState(datos[0]);
         direccion.setCity(datos[1]);
         direccion.setColony(datos[2]);
         direccion.setStreet(datos[3]);
-        direccion.setPostalCode(datos[4]);
-        int num = gettingNumberofHouse(datos[5]);
+        //direccion.setPostalCode(datos[4]);
+        int num = gettingNumberofHouse(datos[4]);
         direccion.setNumber(num);
         System.out.println(direccion.toString());
         return direccion;

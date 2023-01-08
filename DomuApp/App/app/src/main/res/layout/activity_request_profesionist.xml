@@ -58,6 +58,7 @@
             android:textAlignment="center"
             android:text="BUSCANDO PROFESIONISTA..."
             android:textSize="18sp"
+            android:textColor="@color/colorPrimary"
             />
 
         <LinearLayout

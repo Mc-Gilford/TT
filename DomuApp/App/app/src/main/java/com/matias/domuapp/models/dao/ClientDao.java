@@ -9,4 +9,6 @@ public class ClientDao {
         mDatabase = mDatabase.child("Users").child("Clients");;
         return mDatabase;
     }
+
+
 }

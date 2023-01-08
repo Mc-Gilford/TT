@@ -123,4 +123,7 @@ public class UserDao {
         });
     }
 
+    public DatabaseReference getUser(String IdentifierUser, DatabaseReference databaseReference) {
+        return databaseReference.child(IdentifierUser);
+    }
 }

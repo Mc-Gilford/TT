@@ -6,18 +6,26 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.matias.domuapp.activities.MainActivity;
 import com.matias.domuapp.activities.cliente.DetailRequestActivity;
 import com.matias.domuapp.activities.cliente.MapClienteActivity;
+import com.matias.domuapp.models.Persona;
 import com.matias.domuapp.models.dao.ClientDao;
 import com.matias.domuapp.models.dao.UserDao;
 import com.matias.domuapp.providers.AuthProvider;
+import com.matias.domuapp.providers.ClienteProvider;
 
 public class ClientController {
     private DatabaseReference databaseReference;
     private ClientDao clientDao;
+    private Persona persona;
     public void logout(AuthProvider mAuthProvider, Context context) {
         mAuthProvider.logout();
         Intent intent = new Intent(context,MainActivity.class);
@@ -40,7 +48,24 @@ public class ClientController {
             Toast.makeText(context, "Debe seleccionar el lugar donde requieres el servicio", Toast.LENGTH_SHORT).show();
         }
     }
-    public DatabaseReference getClient(String idCliente){
-        return clientDao.getmDatabaseCliente(databaseReference.child(idCliente));
+    public String getClient(String idCliente){
+        ClienteProvider clienteProvider = new ClienteProvider();
+
+        clienteProvider.getClient(idCliente).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    persona.setName(dataSnapshot.child("name").getValue().toString());
+                    persona.setLastname(dataSnapshot.child("lastname").getValue().toString());
+                    persona.setSecondname(dataSnapshot.child("secondname").getValue().toString());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return persona.getFullName();
     }
 }

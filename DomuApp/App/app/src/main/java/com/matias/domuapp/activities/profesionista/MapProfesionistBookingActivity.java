@@ -46,7 +46,6 @@ import com.google.android.gms.maps.model.SquareCap;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
-import com.matias.domuapp.activities.cliente.CalificationClientActivity;
 import com.matias.domuapp.controller.TokenController;
 import com.matias.domuapp.controller.UserController;
 import com.matias.domuapp.models.FCMBody;
@@ -59,7 +58,6 @@ import com.matias.domuapp.providers.GoogleApiProvider;
 import com.matias.domuapp.providers.NotificationProvider;
 import com.matias.domuapp.R;
 import com.matias.domuapp.utils.DecodePoints;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -68,7 +66,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -156,7 +153,7 @@ public class MapProfesionistBookingActivity extends AppCompatActivity implements
         mGeofireProvider = new GeofireProvider();
         //mTokenProvider = new TokenProvider();
         mExtraClientId = getIntent().getStringExtra("idClient");
-        tokenController = new TokenController(mExtraClientId);
+        tokenController = new TokenController();
         mClientProvider = new ClienteProvider();
         mClientBookingProvider = new ClientBookingProvider();
         mNotificationProvider = new NotificationProvider();
@@ -172,8 +169,11 @@ public class MapProfesionistBookingActivity extends AppCompatActivity implements
         mButtonRutaBooking = findViewById(R.id.btnRutaBooking);
         mImageViewBooking = findViewById(R.id.imageViewClientBooking);
         mGoogleApiProvider = new GoogleApiProvider(MapProfesionistBookingActivity.this);
+        userController = new UserController();
+        //getClient();
+        userController.getUser(mExtraClientId,"profesionista", MapProfesionistBookingActivity.this, mImageViewBooking,
+                mTextViewClientBooking, mTextViewEmailClientBooking,mTextViewDestinationClientBooking);
 
-        getClient();
         mButtonRutaBooking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -224,6 +224,7 @@ public class MapProfesionistBookingActivity extends AppCompatActivity implements
         sendNotification("Servicio iniciado");
     }
     private void rutaBooking() {
+        System.out.println("Ruta booking "+mExtraClientId);
         mClientBookingProvider.updateStatus(mExtraClientId, "accept");
         mButtonRutaBooking.setVisibility(View.GONE);
         mButtonStartBooking.setVisibility(View.VISIBLE);
@@ -263,7 +264,11 @@ public class MapProfesionistBookingActivity extends AppCompatActivity implements
                     mOriginLatLng = new LatLng(originLat, originLng);
                     mDestinationLatLng = new LatLng(destinatioLat, destinatioLng);
                     mTextViewOriginClientBooking.setText("Ubicacion: " + destination);
-                    mTextViewDestinationClientBooking.setText("Servicio: " + "Veterinario");
+                    mTextViewDestinationClientBooking.setText("Servicio: ");
+                    userController = new UserController();
+                    //getClient();
+                    userController.getUser(mExtraClientId,"profesionista", MapProfesionistBookingActivity.this, mImageViewBooking,
+                            mTextViewClientBooking, mTextViewEmailClientBooking,mTextViewDestinationClientBooking);
                     //mMap.addMarker(new MarkerOptions().position(mOriginLatLng).title("Ubicación").icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_ubicacion)));
                     drawRoute(mOriginLatLng);
                 }
@@ -489,6 +494,7 @@ public class MapProfesionistBookingActivity extends AppCompatActivity implements
         }
     }
     private void sendNotification(final String status) {
+        System.out.println("Cliente id "+mExtraClientId);
         tokenController.getmDatabaseReference(mExtraClientId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

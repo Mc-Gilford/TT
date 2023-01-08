@@ -6,6 +6,7 @@ import com.matias.domuapp.models.dao.TokenDao;
 public class TokenController {
     private DatabaseReference mDatabaseReference;
     private TokenDao tokenDao;
+    public TokenController(){tokenDao = new TokenDao(mDatabaseReference);};
     public TokenController(String AuthId){
         generateToken(AuthId);
     }

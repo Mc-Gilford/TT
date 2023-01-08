@@ -23,7 +23,10 @@ public class Direccion {
                 ", number=" + number +
                 '}';
     }
-
+    public String getDomicilio(){
+        return country + " "+state+" "+city +" "+colony +" "+ street +" "+ postalCode + " " +
+                 number;
+    }
     public String getId() {
         return id;
     }
@@ -35,6 +38,8 @@ public class Direccion {
     public String getCountry() {
         return country;
     }
+
+
 
     public void setCountry(String country) {
         this.country = country;
