@@ -52,6 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
     TextInputEditText mTextNumber;
     TextInputEditText mTextInputEmail;
     TextInputEditText mTextInputPassword;
+    String servicio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +83,7 @@ public class RegisterActivity extends AppCompatActivity {
                 RegisterController registerController = new RegisterController();
                 Usuario finalUser=settingUser("Cliente");
                 System.out.println("Creando Cliente "+ finalUser.toString());
-                registerController.clickRegister(finalUser, mAuthProvider,RegisterActivity.this);
+                registerController.clickRegister(finalUser,mAuthProvider,RegisterActivity.this);
             }
         });
         mButtonRegisterProfesional.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +92,8 @@ public class RegisterActivity extends AppCompatActivity {
                 RegisterController registerController = new RegisterController();
                 Usuario finalUser=settingUser("Profesional");
                 System.out.println("Creando Profesional "+ finalUser.toString());
-                registerController.clickRegister(finalUser, mAuthProvider,RegisterActivity.this);
+                servicio = "Veterinario";
+                registerController.clickRegister(finalUser,servicio,mAuthProvider,RegisterActivity.this);
             }
         });
     }
@@ -104,7 +106,7 @@ public class RegisterActivity extends AppCompatActivity {
         Persona person = new Persona();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = null;
-        Direccion direccion = new Direccion();
+        Direccion direccion;
         person.setName(mTextInputName.getText().toString());
         person.setLastname(mTextInputLastName.getText().toString());
         person.setSecondname(mTextInputSecondName.getText().toString());
