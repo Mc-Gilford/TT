@@ -42,7 +42,7 @@ public class ProfesionistaProvider {
         map.put("qualification",profesionista.getQualification());
         map.put("typeUser",profesionista.getTypeUser());
         map.put("servicio",profesionista.getServicio());
-        map.put("image",profesionista.getServicio());
+        map.put("image",profesionista.getImage());
         return mDatabase.child(profesionista.getId()).setValue(map);
     }
 

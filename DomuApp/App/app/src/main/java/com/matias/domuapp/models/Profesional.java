@@ -9,7 +9,7 @@ public class Profesional extends Usuario {
     private List<Integer> qualification; /*Calificaciones por usuarios*/
     private String Specialization;
     private String image;
-    private String Servicio;
+    public String Servicio;
 
     public String getServicio() {
         return Servicio;

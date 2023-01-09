@@ -266,7 +266,7 @@
                 android:id="@+id/btnRegisterProfessional"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Registrar Profesional"
+                android:text="Registrar Profesionista"
                 android:background="@drawable/rounded_button"
                 android:backgroundTint="@color/colorSecondary"
                 android:layout_margin="40dp"

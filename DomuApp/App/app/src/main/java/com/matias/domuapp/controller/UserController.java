@@ -98,6 +98,25 @@ public class UserController {
         }
     }
 
+    public Boolean createUser(Usuario user, Context context, String servicio){
+        UserDao userDao = new UserDao();
+        System.out.println("Creando Usuario por tipo");
+        if(user.getTypeUser()=="Cliente"){
+            ClienteProvider mClienteProvider = new ClienteProvider();
+            Usuario obj =  (Cliente) user;
+            Cliente cliente = (Cliente) obj;
+            userDao.createUser(cliente,mClienteProvider,context);
+            return true;
+        }else if(user.getTypeUser()=="Profesional"){
+            ProfesionistaProvider profesionistaProvider = new ProfesionistaProvider();
+            Profesional profesional = (Profesional) user;
+            profesional.setServicio(servicio);
+            userDao.createUser(profesional,profesionistaProvider,context);
+            return true;
+        }
+        return false;
+    }
+
     public Boolean createUser(Usuario user, Context context){
         UserDao userDao = new UserDao();
         System.out.println("Creando Usuario por tipo");

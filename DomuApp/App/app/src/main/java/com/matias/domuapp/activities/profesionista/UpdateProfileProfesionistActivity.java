@@ -141,6 +141,7 @@ public class UpdateProfileProfesionistActivity extends AppCompatActivity {
                     String image = "";
                     if (dataSnapshot.hasChild("image")) {
                         image = dataSnapshot.child("image").getValue().toString();
+                        System.out.println("Imagen userr profesionist"+ image);
                         Picasso.with(UpdateProfileProfesionistActivity.this).load(image).into(mImageViewProfile);
                     }
                     mTextViewName.setText(name+" "+lastname+" "+secondname);
