@@ -98,7 +98,7 @@ public class ProfessionalController {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (!dataSnapshot.exists()) {
-                    Toast.makeText(context, "El cliente cancelo el viaje", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "El cliente cancelo el servicio", Toast.LENGTH_LONG).show();
                     if (mHandler != null) mHandler.removeCallbacks(runnable);
                     Intent intent = new Intent(context, MapProfesionistaActivity.class);
                     context.startActivity(intent);

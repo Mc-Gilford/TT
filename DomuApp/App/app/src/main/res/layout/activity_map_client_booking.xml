@@ -22,11 +22,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Estado"
-            android:textColor="@color/colorWhite"/>
+            android:textColor="@color/colorWhite" />
+
 
     </androidx.cardview.widget.CardView>
 
-
+    <Button
+        android:id="@+id/btnCancelRequest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="cancelar Servicio"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="@color/colorRed"
+        android:textColor="@color/colorWhite"
+        android:layout_marginLeft="220dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"/>
     <fragment
         android:id="@+id/map"
         android:layout_width="match_parent"
@@ -38,7 +49,7 @@
 
     <com.github.florent37.shapeofview.shapes.BubbleView
         android:layout_width="match_parent"
-        android:layout_height="170dp"
+        android:layout_height="185dp"
         app:shape_bubble_arrowHeight="15dp"
         app:shape_bubble_arrowWidth="15dp"
         app:shape_bubble_arrowPosition="top"
@@ -117,7 +128,16 @@
                     android:layout_marginTop="5dp"
                     android:maxLines="1"
                     android:textSize="16sp"/>
-
+                <RatingBar
+                    android:id="@+id/MyRating"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:rating="5"
+                    android:layout_marginLeft="10dp"
+                    android:stepSize="0.5" />
             </LinearLayout>
 
         </LinearLayout>

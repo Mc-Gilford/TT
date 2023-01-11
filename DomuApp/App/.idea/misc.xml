@@ -7,10 +7,15 @@
         <entry key="..\:/Users/arman/OneDrive/Documentos/ESCOM/TT2/Github/Domu/DomuApp/App/app/src/main/res/layout/activity_detail_request.xml" value="0.215625" />
         <entry key="..\:/Users/arman/OneDrive/Documentos/ESCOM/TT2/Github/Domu/DomuApp/App/app/src/main/res/layout/activity_map_client_booking.xml" value="0.215625" />
         <entry key="..\:/Users/arman/OneDrive/Documentos/ESCOM/TT2/Github/Domu/DomuApp/App/app/src/main/res/layout/activity_map_cliente.xml" value="0.22864583333333333" />
+        <entry key="..\:/Users/arman/OneDrive/Documentos/ESCOM/TT2/Github/Domu/DomuApp/App/app/src/main/res/layout/activity_map_profesionist_booking.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/arman/OneDrive/Documentos/ESCOM/TT2/Github/Domu/DomuApp/App/app/src/main/res/layout/activity_map_profesionista.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/arman/OneDrive/Documentos/ESCOM/TT2/Github/Domu/DomuApp/App/app/src/main/res/layout/activity_notification_booking.xml" value="0.215625" />
+        <entry key="..\:/Users/arman/OneDrive/Documentos/ESCOM/TT2/Github/Domu/DomuApp/App/app/src/main/res/layout/activity_register.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/arman/OneDrive/Documentos/ESCOM/TT2/Github/Domu/DomuApp/App/app/src/main/res/layout/activity_register_profesionista.xml" value="0.215625" />
         <entry key="..\:/Users/arman/OneDrive/Documentos/ESCOM/TT2/Github/Domu/DomuApp/App/app/src/main/res/layout/activity_request_profesionist.xml" value="0.215625" />
+        <entry key="..\:/Users/arman/OneDrive/Documentos/ESCOM/TT2/Github/Domu/DomuApp/App/app/src/main/res/layout/activity_services.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/arman/OneDrive/Documentos/ESCOM/TT2/Github/Domu/DomuApp/App/app/src/main/res/layout/activity_update_profile_profesionist.xml" value="0.23854166666666668" />
+        <entry key="..\:/Users/arman/OneDrive/Documentos/ESCOM/TT2/Github/Domu/DomuApp/App/app/src/main/res/layout/activity_view_list_profesionist.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/arman/OneDrive/Documentos/ESCOM/TT2/Github/Domu/DomuApp/App/app/src/main/res/layout/card_history_booking.xml" value="0.21041666666666667" />
         <entry key="..\:/Users/arman/OneDrive/Documentos/ESCOM/TT2/Github/Domu/DomuApp/App/app/src/main/res/layout/infowindow_layout.xml" value="0.264" />
       </map>

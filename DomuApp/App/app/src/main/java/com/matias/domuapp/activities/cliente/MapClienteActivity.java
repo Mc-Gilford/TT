@@ -351,7 +351,7 @@ public class MapClienteActivity extends AppCompatActivity implements OnMapReadyC
 
                 LatLng driverLatLng = new LatLng(location.latitude, location.longitude);
                 Marker marker = mMap.addMarker(new MarkerOptions().position(driverLatLng).title("Profesionista disponible").icon(BitmapDescriptorFactory.fromResource(R.drawable.veterinario_icon)));
-                mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(LayoutInflater.from(getApplicationContext())));
+                //mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(LayoutInflater.from(getApplicationContext())));
                 marker.setTag(key);
                 mProfesionistMarkers.add(marker);
             }

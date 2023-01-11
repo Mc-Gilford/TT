@@ -10,6 +10,9 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,6 +31,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.model.SquareCap;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
@@ -35,6 +39,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.matias.domuapp.activities.profesionista.MapProfesionistBookingActivity;
+import com.matias.domuapp.controller.NotificationController;
+import com.matias.domuapp.controller.TokenController;
 import com.matias.domuapp.controller.UserController;
 import com.matias.domuapp.providers.AuthProvider;
 import com.matias.domuapp.providers.ClientBookingProvider;
@@ -68,6 +74,7 @@ public class MapClientBookingActivity extends AppCompatActivity implements OnMap
     private boolean mIsFirstTime = true;
     private String mOrigin;
     private LatLng mOriginLatLng;
+    private Button mButtonCancelRequest;
     private String mDestination;
     private LatLng mDestinationLatLng;
     private LatLng mProfesionistLatLng;
@@ -84,6 +91,9 @@ public class MapClientBookingActivity extends AppCompatActivity implements OnMap
     private String mIdProfesionist;
     private ValueEventListener mListenerStatus;
     private UserController userController;
+    NotificationController notificationController;
+    private String  mIdProfesionistFound = "";
+    private TokenController tokenController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,9 +101,11 @@ public class MapClientBookingActivity extends AppCompatActivity implements OnMap
         setContentView(R.layout.activity_map_client_booking);
 
         mAuthProvider = new AuthProvider();
+        notificationController = new NotificationController();
         mGeofireProvider = new GeofireProvider();
         //mTokenProvider = new TokenProvider();
         mClientBookingProvider = new ClientBookingProvider();
+        mButtonCancelRequest = findViewById(R.id.btnCancelRequest);
         mGoogleApiProvider = new GoogleApiProvider(MapClientBookingActivity.this);
         mProfesionistProvider = new ProfesionistaProvider();
         mMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -109,12 +121,27 @@ public class MapClientBookingActivity extends AppCompatActivity implements OnMap
         mTextViewOriginClientBooking = findViewById(R.id.textViewOriginProfesionistBooking);
         mTextViewDestinationClientBooking = findViewById(R.id.textViewDestinationProfesionistBooking);
         mImageViewBooking = findViewById(R.id.imageViewClientBooking);
-
+        mButtonCancelRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cancelRequest();
+            }
+        });
         getStatus();
         getClientBooking();
 
         //mPlaces = Places.createClient(this);
     }
+
+    private void cancelRequest() {
+        mClientBookingProvider.delete(mAuthProvider.getId()).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                notificationController.sendNotificationCancel(MapClientBookingActivity.this,mIdProfesionistFound,tokenController);
+            }
+        });
+    }
+
     private void getStatus() {
         mListenerStatus =  mClientBookingProvider.getStatus(mAuthProvider.getId()).addValueEventListener(new ValueEventListener() {
             @Override
@@ -229,6 +256,8 @@ public class MapClientBookingActivity extends AppCompatActivity implements OnMap
         });*/
     }
 
+
+
     private void getProfesionistLocation(String idProfesionist) {
         mListener = mGeofireProvider.getProfesionistLocation(idProfesionist).addValueEventListener(new ValueEventListener() {
             @Override
@@ -244,6 +273,8 @@ public class MapClientBookingActivity extends AppCompatActivity implements OnMap
                             .position(new LatLng(lat, lng))
                             .title("Tu profesionista")
                             .icon(BitmapDescriptorFactory.fromResource(R.drawable.veterinario_icon)));
+                    mMap.setInfoWindowAdapter(new MapClientBookingActivity.CustomInfoWindowAdapter(LayoutInflater.from(getApplicationContext())));
+
                     if (mIsFirstTime) {
                         mIsFirstTime = false;
                         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(
@@ -262,6 +293,35 @@ public class MapClientBookingActivity extends AppCompatActivity implements OnMap
 
             }
         });
+    }
+
+    public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
+
+        private static final String TAG = "CustomInfoWindowAdapter";
+        private LayoutInflater inflater;
+
+        public CustomInfoWindowAdapter(LayoutInflater inflater){
+            this.inflater = inflater;
+        }
+
+        @Override
+        public View getInfoContents(final Marker m) {
+            //Carga layout personalizado.
+            View v = inflater.inflate(R.layout.infowindow_layout, null);
+            String[] info = m.getTitle().split("&");
+            String url = m.getSnippet();
+            ((TextView)v.findViewById(R.id.info_window_nombre)).setText("Lina Cortés");
+            ((TextView)v.findViewById(R.id.info_window_placas)).setText("Vacunas: $100 \nConsulta: $150" +
+                    "\n" + "Curación: $100");
+
+            return v;
+        }
+
+        @Override
+        public View getInfoWindow(Marker m) {
+            return null;
+        }
+
     }
 
     private void drawRoute(LatLng latLng) {
