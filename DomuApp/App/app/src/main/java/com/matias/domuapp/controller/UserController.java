@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.matias.domuapp.activities.RegisterActivity;
+import com.matias.domuapp.activities.Services;
 import com.matias.domuapp.activities.cliente.MapClienteActivity;
 import com.matias.domuapp.activities.profesionista.MapProfesionistaActivity;
 import com.matias.domuapp.models.Cliente;
@@ -159,10 +160,12 @@ public class UserController {
         System.out.println("Salimos "+user);
         return user;
     }
+
+    /*This is the fucntion that function*/
     public void movingToUserInterface(Usuario user, Context context){
         LOGGER.log(Level.INFO,"Typer of screen "+user.getTypeUser());
         if(user.getTypeUser().equals("Profesional")){
-            Intent intent = new Intent(context, MapProfesionistaActivity.class);
+            Intent intent = new Intent(context, Services.class);
             LOGGER.log(Level.INFO, "Map profesional");
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             context.startActivity(intent);
