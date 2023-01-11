@@ -165,12 +165,12 @@ public class UserController {
     public void movingToUserInterface(Usuario user, Context context){
         LOGGER.log(Level.INFO,"Typer of screen "+user.getTypeUser());
         if(user.getTypeUser().equals("Profesional")){
-            Intent intent = new Intent(context, Services.class);
+            Intent intent = new Intent(context, MapProfesionistaActivity.class);
             LOGGER.log(Level.INFO, "Map profesional");
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             context.startActivity(intent);
         }else if(user.getTypeUser().equals("Cliente")){
-            Intent intent = new Intent(context, MapClienteActivity.class);
+            Intent intent = new Intent(context, Services.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             LOGGER.log(Level.INFO, "Map cliente");
             context.startActivity(intent);

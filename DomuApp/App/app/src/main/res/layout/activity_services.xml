@@ -23,12 +23,15 @@
                 android:layout_margin="10dp"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="140dp"
-                    android:layout_height="140dp"
-                    android:layout_margin="4dp"
-                    android:src="@drawable/icon_password" />
-
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imageViewProfile"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center|top"
+                    app:civ_border_width="5dp"
+                    app:civ_border_color="#F0F0F0"
+                    android:src="@drawable/man"
+                    />
                 <TextView
                     android:id="@+id/text_view_id"
                     android:layout_width="wrap_content"
@@ -39,88 +42,87 @@
                     android:textSize="30dp" />
             </LinearLayout>
             <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="3dp">
+                <TextView
+                    android:id="@+id/text_view_servicio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:text="Selecciona un servicio"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="30dp" />
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_margin="0dp">
+                android:layout_margin="3dp">
                 <Button
                     android:id="@+id/btnSelectVeterinario"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Veterinario"
                     android:backgroundTint="@color/colorSecondary"
-                    android:layout_margin="0dp"
+                    android:layout_margin="3dp"
                     android:textColor="@color/colorWhite" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_margin="0dp">
+                android:layout_margin="3dp">
                 <Button
                     android:id="@+id/btnSelectEstilista"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Estilista"
                     android:backgroundTint="@color/colorSecondary"
-                    android:layout_margin="0dp"
+                    android:layout_margin="3dp"
                     android:textColor="@color/colorWhite" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_margin="0dp">
+                android:layout_margin="3dp">
                 <Button
                     android:id="@+id/btnSelectDoctor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Doctor"
                     android:backgroundTint="@color/colorSecondary"
-                    android:layout_margin="0dp"
+                    android:layout_margin="3dp"
                     android:textColor="@color/colorWhite" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_margin="0dp">
+                android:layout_margin="3dp">
                 <Button
                     android:id="@+id/btnSelectEnfermeria"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Enfermeria"
                     android:backgroundTint="@color/colorSecondary"
-                    android:layout_margin="0dp"
+                    android:layout_margin="3dp"
                     android:textColor="@color/colorWhite" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_margin="0dp">
+                android:layout_margin="3dp">
                 <Button
                     android:id="@+id/btnSelectCuidador"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Cuidador de mascotas"
                     android:backgroundTint="@color/colorSecondary"
-                    android:layout_margin="0dp"
-                    android:textColor="@color/colorWhite" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="0dp">
-                <Button
-                    android:id="@+id/btnPerfil"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Perfil"
-                    android:background="@drawable/rounded_button"
-                    android:backgroundTint="@color/colorSecondary"
-                    android:layout_margin="80dp"
+                    android:layout_margin="3dp"
                     android:textColor="@color/colorWhite" />
             </LinearLayout>
         </LinearLayout>

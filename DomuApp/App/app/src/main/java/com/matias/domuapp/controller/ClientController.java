@@ -4,6 +4,8 @@ import static androidx.core.content.ContextCompat.startActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,11 +18,14 @@ import com.google.firebase.database.ValueEventListener;
 import com.matias.domuapp.activities.MainActivity;
 import com.matias.domuapp.activities.cliente.DetailRequestActivity;
 import com.matias.domuapp.activities.cliente.MapClienteActivity;
+import com.matias.domuapp.activities.cliente.UpdateProfileActivity;
+import com.matias.domuapp.models.Cliente;
 import com.matias.domuapp.models.Persona;
 import com.matias.domuapp.models.dao.ClientDao;
 import com.matias.domuapp.models.dao.UserDao;
 import com.matias.domuapp.providers.AuthProvider;
 import com.matias.domuapp.providers.ClienteProvider;
+import com.squareup.picasso.Picasso;
 
 public class ClientController {
     private DatabaseReference databaseReference;
@@ -50,7 +55,7 @@ public class ClientController {
     }
     public String getClient(String idCliente){
         ClienteProvider clienteProvider = new ClienteProvider();
-
+        persona = new Persona();
         clienteProvider.getClient(idCliente).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -68,4 +73,26 @@ public class ClientController {
         });
         return persona.getFullName();
     }
+
+    public void getProfileInformation(ClienteProvider clienteProvider, AuthProvider authProvider, final TextView textView,
+                                      final Context contex, final ImageView mImageViewProfile, final String moreText){
+        clienteProvider.getClient(authProvider.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    String name = dataSnapshot.child("person").child("name").getValue().toString();
+                    String lastname = dataSnapshot.child("person").child("lastname").getValue().toString();
+                    String secondname = dataSnapshot.child("person").child("secondname").getValue().toString();
+                    textView.setText(moreText.toUpperCase()+" "+name.toUpperCase()+" "+lastname.toUpperCase()+" "+secondname.toUpperCase());
+                    if (dataSnapshot.hasChild("image")) {
+                        String image = dataSnapshot.child("image").getValue().toString();
+                        Picasso.with(contex).load(image).into(mImageViewProfile);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
+        });
+    }
+
 }

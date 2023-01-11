@@ -95,7 +95,7 @@ public class UserDao {
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
                     Toast.makeText(context,"Registro Exitoso",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(context, MapClienteActivity.class);
+                    Intent intent = new Intent(context, Services.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     context.startActivity(intent);
                 }
@@ -113,7 +113,7 @@ public class UserDao {
                 if (task.isSuccessful()){
                     System.out.println("Registro exitoso");
                     Toast.makeText(context,"Registro Exitoso",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(context, Services.class);
+                    Intent intent = new Intent(context, MapProfesionistaActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     context.startActivity(intent);
                 }
