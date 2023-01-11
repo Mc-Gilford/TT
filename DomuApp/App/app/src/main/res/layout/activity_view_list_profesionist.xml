@@ -14,7 +14,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        android:background="@color/colorSecondary"
+
         />
+    <Button
+        android:id="@+id/btnSolicitar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Solicitar Servicio"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="@color/colorSecondary"
+        android:layout_gravity="bottom"
+        android:layout_margin="20dp"
+        android:textColor="@color/colorWhite" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

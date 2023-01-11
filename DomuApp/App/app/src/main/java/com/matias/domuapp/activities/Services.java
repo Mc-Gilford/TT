@@ -55,7 +55,7 @@ public class Services extends AppCompatActivity {
         btnSelectVetetinario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Services.this, MapClienteActivity.class);
+                Intent intent = new Intent(Services.this, ViewListProfesionistActivity.class);
                 startActivity(intent);
             }
         });

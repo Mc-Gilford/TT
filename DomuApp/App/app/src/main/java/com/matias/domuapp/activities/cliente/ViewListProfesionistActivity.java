@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQueryEventListener;
@@ -55,6 +58,7 @@ public class ViewListProfesionistActivity extends AppCompatActivity {
     private ArrayList<Profesional>arrayList = new ArrayList<Profesional>();
     private ProfesionistasActiveAdapter profesionistasActiveAdapter;
     private ProfesionistaProvider profesionistaProvider;
+    private Button button;
 
 
     LocationCallback mLocationCallback = new LocationCallback() {
@@ -78,7 +82,14 @@ public class ViewListProfesionistActivity extends AppCompatActivity {
         mReciclerView = findViewById(R.id.recyclerViewHistoryBooking);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mReciclerView.setLayoutManager(linearLayoutManager);
-
+        button = findViewById(R.id.btnSolicitar);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent  intent = new Intent(ViewListProfesionistActivity.this, MapClienteActivity.class);
+                startActivity(intent);
+            }
+        });
         profesionistaProvider = new ProfesionistaProvider();
         ActiveUsersDao activeUsersDao = new ActiveUsersDao();
         activeUsersDao.getDatabaseReference().addValueEventListener(new ValueEventListener() {
