@@ -33,7 +33,7 @@ public class GeofireProvider {
     }
 
     public GeoQuery getActiveProfesionist(LatLng latLng, double i) {
-        GeoQuery geoQuery = mGeofire.queryAtLocation(new GeoLocation(latLng.latitude, latLng.longitude), 10);
+        GeoQuery geoQuery = mGeofire.queryAtLocation(new GeoLocation(latLng.latitude, latLng.longitude), 5);
         geoQuery.removeAllListeners();
         return geoQuery;
     }

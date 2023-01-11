@@ -21,10 +21,12 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.geofire.GeoLocation;
@@ -349,6 +351,7 @@ public class MapClienteActivity extends AppCompatActivity implements OnMapReadyC
 
                 LatLng driverLatLng = new LatLng(location.latitude, location.longitude);
                 Marker marker = mMap.addMarker(new MarkerOptions().position(driverLatLng).title("Profesionista disponible").icon(BitmapDescriptorFactory.fromResource(R.drawable.veterinario_icon)));
+                mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(LayoutInflater.from(getApplicationContext())));
                 marker.setTag(key);
                 mProfesionistMarkers.add(marker);
             }
@@ -390,7 +393,34 @@ public class MapClienteActivity extends AppCompatActivity implements OnMapReadyC
         });
     }
 
+    public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
+        private static final String TAG = "CustomInfoWindowAdapter";
+        private LayoutInflater inflater;
+
+        public CustomInfoWindowAdapter(LayoutInflater inflater){
+            this.inflater = inflater;
+        }
+
+        @Override
+        public View getInfoContents(final Marker m) {
+            //Carga layout personalizado.
+            View v = inflater.inflate(R.layout.infowindow_layout, null);
+            String[] info = m.getTitle().split("&");
+            String url = m.getSnippet();
+            ((TextView)v.findViewById(R.id.info_window_nombre)).setText("Lina Cortés");
+            ((TextView)v.findViewById(R.id.info_window_placas)).setText("Vacunas: $100 \nConsulta: $150" +
+                    "\n" + "Curación: $100");
+
+            return v;
+        }
+
+        @Override
+        public View getInfoWindow(Marker m) {
+            return null;
+        }
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.profesionista_menu, menu);
