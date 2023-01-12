@@ -8,6 +8,8 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.matias.domuapp.R;
+
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.matias.domuapp.adapters.HistoryBookingProfesionistAdapter;
@@ -36,6 +38,20 @@ public class HistoryBookingProfesionistActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         mAuthProvider = new AuthProvider();
+        Intent intentBefore= getIntent();
+        Bundle bundle = intentBefore.getExtras();
+        if(bundle!=null){
+            String id =(String) bundle.get("idProfesionista");
+            System.out.println("Id Recibida "+id);
+            Query query = FirebaseDatabase.getInstance().getReference()
+                    .child("HistoryBooking")
+                    .orderByChild("idProfesionist")
+                    .equalTo(id);
+            FirebaseRecyclerOptions<HistoryBooking> options = new FirebaseRecyclerOptions.Builder<HistoryBooking>()
+                    .setQuery(query, HistoryBooking.class)
+                    .build();
+            mAdapter = new HistoryBookingProfesionistAdapter(options, HistoryBookingProfesionistActivity.this);
+        }else{
         Query query = FirebaseDatabase.getInstance().getReference()
                 .child("HistoryBooking")
                 .orderByChild("idProfesionist")
@@ -44,7 +60,7 @@ public class HistoryBookingProfesionistActivity extends AppCompatActivity {
                 .setQuery(query, HistoryBooking.class)
                 .build();
         mAdapter = new HistoryBookingProfesionistAdapter(options, HistoryBookingProfesionistActivity.this);
-
+        }
         mReciclerView.setAdapter(mAdapter);
         mAdapter.startListening();
     }

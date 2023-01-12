@@ -1,6 +1,7 @@
 package com.matias.domuapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.matias.domuapp.R;
+import com.matias.domuapp.activities.cliente.HistoryBookingDetailClientActivity;
+import com.matias.domuapp.activities.profesionista.HistoryBookingDetailProfesionistActivity;
+import com.matias.domuapp.activities.profesionista.HistoryBookingProfesionistActivity;
 import com.matias.domuapp.models.Profesional;
 import com.matias.domuapp.providers.ProfesionistaProvider;
 import com.squareup.picasso.Picasso;
@@ -39,6 +43,7 @@ public class ProfesionistasActiveAdapter extends RecyclerView.Adapter<Profesioni
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.createData(arrayList.get(position),holder);
+
     }
 
     @Override
@@ -67,12 +72,21 @@ public class ProfesionistasActiveAdapter extends RecyclerView.Adapter<Profesioni
 
 
 
-        public void createData(Profesional profesional,@NonNull final ViewHolder holder) {
+        public void createData(final Profesional profesional, @NonNull final ViewHolder holder) {
             textViewName.setText(profesional.getPerson().getName()+" "+profesional.getPerson().getLastname()+" "+profesional.getPerson().getSecondname());
             textViewOrigin.setText(profesional.getServicio());
             //textViewDestination.setText(s);
             textViewCalification.setText(profesional.getScore().toString());
             Picasso.with(mContext).load(profesional.getImage()).into(holder.imageViewHistoryBooking);
+            holder.mView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, HistoryBookingProfesionistActivity.class);
+                    System.out.println("Profesional information "+profesional.getId());
+                    intent.putExtra("idProfesionista", profesional.getId());
+                    mContext.startActivity(intent);
+                }
+            });
         }
     }
 }

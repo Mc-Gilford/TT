@@ -16,6 +16,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.matias.domuapp.R;
+import com.matias.domuapp.activities.Services;
 import com.matias.domuapp.models.ClientBooking;
 import com.matias.domuapp.models.HistoryBooking;
 import com.matias.domuapp.providers.AuthProvider;
@@ -114,7 +115,7 @@ public class CalificationProfesionistActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(CalificationProfesionistActivity.this, "La calificacion se guardo correctamente", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(CalificationProfesionistActivity.this, MapClienteActivity.class);
+                                Intent intent = new Intent(CalificationProfesionistActivity.this, Services.class);
                                 startActivity(intent);
                                 finish();
                             }
@@ -124,7 +125,7 @@ public class CalificationProfesionistActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(CalificationProfesionistActivity.this, "La calificacion se guardo correctamente", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(CalificationProfesionistActivity.this, MapClienteActivity.class);
+                                Intent intent = new Intent(CalificationProfesionistActivity.this, Services.class);
                                 startActivity(intent);
                                 finish();
                             }

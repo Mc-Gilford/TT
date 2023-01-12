@@ -60,7 +60,6 @@ public class ViewListProfesionistActivity extends AppCompatActivity {
     private ProfesionistaProvider profesionistaProvider;
     private Button button;
 
-
     LocationCallback mLocationCallback = new LocationCallback() {
         @Override
         public void onLocationResult(LocationResult locationResult) {
@@ -112,7 +111,6 @@ public class ViewListProfesionistActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.exists()){
-                                System.out.println("Hello");
                                 Profesional profesional = new Profesional();
                                 Persona person= new Persona();
                                 person.setName(dataSnapshot.child("person").child("name").getValue().toString());
@@ -120,21 +118,23 @@ public class ViewListProfesionistActivity extends AppCompatActivity {
                                 person.setSecondname(dataSnapshot.child("person").child("secondname").getValue().toString());
                                 profesional.setServicio(dataSnapshot.child("servicio").getValue().toString());
                                 profesional.setScore(5F);
+                                if(dataSnapshot.child("image").exists()){
                                 profesional.setImage(dataSnapshot.child("image").getValue().toString());
+                                }
                                 profesional.setPerson(person);
+                                profesional.setId(dataSnapshot.child("id").getValue().toString());
                                 arrayList.add(profesional);
-                                System.out.println("Sol "+arrayList.toString());
-                                //Profesional profesional = dataSnapshot.getValue(Profesional.class);
-                                //System.out.println(dataSnapshot.child("name").getValue().toString());
-                                //System.out.println(profesional.toString());
                                 profesionistasActiveAdapter = new ProfesionistasActiveAdapter(arrayList,profesionistaProvider,ViewListProfesionistActivity.this);
                                 mReciclerView.setAdapter(profesionistasActiveAdapter);
                             }
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {}
+
                     });
+
                 }
+
                 System.out.println("Soy "+arrayList.toString());
 
             }
