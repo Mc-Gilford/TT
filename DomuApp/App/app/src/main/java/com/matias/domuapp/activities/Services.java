@@ -62,8 +62,8 @@ public class Services extends AppCompatActivity {
         btnSelectEstilista.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Services.this, ViewListProfesionistActivity.class);
-                startActivity(intent);
+               // Intent intent = new Intent(Services.this, ViewListProfesionistActivity.class);
+               // startActivity(intent);
             }
         });
 
