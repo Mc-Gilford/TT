@@ -14,6 +14,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.matias.domuapp.R;
+import com.matias.domuapp.activities.cliente.MaintenancePage;
 import com.matias.domuapp.activities.cliente.MapClienteActivity;
 import com.matias.domuapp.activities.cliente.UpdateProfileActivity;
 import com.matias.domuapp.activities.cliente.ViewListProfesionistActivity;
@@ -30,6 +31,9 @@ public class Services extends AppCompatActivity {
 
     private Button btnSelectVetetinario;
     private Button btnSelectEstilista;
+    private Button btnSelectDoctor;
+    private Button btnSelectEnfermeria;
+    private Button btnSelectCuidador;
     private Button btnSeeProfile;
     private AuthProvider authProvider;
     private ClienteProvider clienteProvider;
@@ -42,6 +46,9 @@ public class Services extends AppCompatActivity {
         setContentView(R.layout.activity_services);
         btnSelectVetetinario = findViewById(R.id.btnSelectVeterinario);
         btnSelectEstilista = findViewById(R.id.btnSelectEstilista);
+        btnSelectDoctor = findViewById(R.id.btnSelectDoctor);
+        btnSelectEnfermeria = findViewById(R.id.btnSelectEnfermeria);
+        btnSelectCuidador = findViewById(R.id.btnSelectCuidador);
         mImageViewProfile = findViewById(R.id.imageViewProfile);
         textView = findViewById(R.id.text_view_id);
         authProvider = new AuthProvider();
@@ -66,6 +73,28 @@ public class Services extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btnSelectDoctor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Services.this, MaintenancePage.class);
+                startActivity(intent);
+            }
+        });
+        btnSelectEnfermeria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Services.this, MaintenancePage.class);
+                startActivity(intent);
+            }
+        });
+        btnSelectCuidador.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Services.this, MaintenancePage.class);
+                startActivity(intent);
+            }
+        });
+
 
 
 

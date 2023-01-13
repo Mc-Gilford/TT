@@ -102,6 +102,13 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".activities.cliente.MaintenancePage"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".activities.profesionista.UpdateProfileProfesionistActivity"
             android:exported="false">
             <meta-data
