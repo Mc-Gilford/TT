@@ -34,7 +34,7 @@ public class ProfesionistasActiveAdapter extends RecyclerView.Adapter<Profesioni
     @NonNull
     @Override
     public ProfesionistasActiveAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_history_booking, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_history_profesionist_client, parent, false);
         return new ProfesionistasActiveAdapter.ViewHolder(view);
     }
 
@@ -75,7 +75,7 @@ public class ProfesionistasActiveAdapter extends RecyclerView.Adapter<Profesioni
         public void createData(final Profesional profesional, @NonNull final ViewHolder holder) {
             textViewName.setText(profesional.getPerson().getName()+" "+profesional.getPerson().getLastname()+" "+profesional.getPerson().getSecondname());
             textViewOrigin.setText(profesional.getServicio());
-            //textViewDestination.setText(s);
+            textViewDestination.setText(profesional.getPerson().getAddress().getCountry()+" "+profesional.getPerson().getAddress().getCity()+profesional.getPerson().getAddress().getColony());
             textViewCalification.setText(profesional.getScore().toString());
             Picasso.with(mContext).load(profesional.getImage()).into(holder.imageViewHistoryBooking);
             holder.mView.setOnClickListener(new View.OnClickListener() {
