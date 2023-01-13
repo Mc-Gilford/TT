@@ -34,6 +34,7 @@ import com.matias.domuapp.R;
 import com.matias.domuapp.adapters.HistoryBookingClientAdapter;
 import com.matias.domuapp.adapters.ProfesionistasActiveAdapter;
 import com.matias.domuapp.includes.MyToolbar;
+import com.matias.domuapp.models.Direccion;
 import com.matias.domuapp.models.HistoryBooking;
 import com.matias.domuapp.models.Persona;
 import com.matias.domuapp.models.Profesional;
@@ -59,6 +60,7 @@ public class ViewListProfesionistActivity extends AppCompatActivity {
     private ProfesionistasActiveAdapter profesionistasActiveAdapter;
     private ProfesionistaProvider profesionistaProvider;
     private Button button;
+    private String servicio;
 
     LocationCallback mLocationCallback = new LocationCallback() {
         @Override
@@ -91,6 +93,14 @@ public class ViewListProfesionistActivity extends AppCompatActivity {
         });
         profesionistaProvider = new ProfesionistaProvider();
         ActiveUsersDao activeUsersDao = new ActiveUsersDao();
+        Intent intentBefore= getIntent();
+        Bundle bundle = intentBefore.getExtras();
+
+        if(bundle!=null)
+        {
+            servicio =(String) bundle.get("Servicio");
+        }
+        System.out.println("Servicio "+servicio);
         activeUsersDao.getDatabaseReference().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -113,17 +123,27 @@ public class ViewListProfesionistActivity extends AppCompatActivity {
                             if (dataSnapshot.exists()){
                                 Profesional profesional = new Profesional();
                                 Persona person= new Persona();
+                                Direccion direccion = new Direccion();
                                 person.setName(dataSnapshot.child("person").child("name").getValue().toString());
                                 person.setLastname(dataSnapshot.child("person").child("lastname").getValue().toString());
                                 person.setSecondname(dataSnapshot.child("person").child("secondname").getValue().toString());
                                 profesional.setServicio(dataSnapshot.child("servicio").getValue().toString());
+                                direccion.setCountry(dataSnapshot.child("person").child("address").child("country").getValue().toString());
+                                direccion.setCity(dataSnapshot.child("person").child("address").child("city").getValue().toString());
+                                direccion.setColony(dataSnapshot.child("person").child("address").child("colony").getValue().toString());
+                                person.setAddress(direccion);
                                 profesional.setScore(5F);
                                 if(dataSnapshot.child("image").exists()){
                                 profesional.setImage(dataSnapshot.child("image").getValue().toString());
                                 }
                                 profesional.setPerson(person);
                                 profesional.setId(dataSnapshot.child("id").getValue().toString());
-                                arrayList.add(profesional);
+                                if(servicio.compareTo(profesional.getServicio())==0){
+                                    arrayList.add(profesional);
+                                }
+                                //arrayList.add(profesional);
+
+                                //ArrayList lista = arrayList;
                                 profesionistasActiveAdapter = new ProfesionistasActiveAdapter(arrayList,profesionistaProvider,ViewListProfesionistActivity.this);
                                 mReciclerView.setAdapter(profesionistasActiveAdapter);
                             }
@@ -134,7 +154,7 @@ public class ViewListProfesionistActivity extends AppCompatActivity {
                     });
 
                 }
-
+                arrayList = new ArrayList<Profesional>();
                 System.out.println("Soy "+arrayList.toString());
 
             }

@@ -56,14 +56,16 @@ public class Services extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Services.this, ViewListProfesionistActivity.class);
+                intent.putExtra("Servicio","Veterinario");
                 startActivity(intent);
             }
         });
         btnSelectEstilista.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // Intent intent = new Intent(Services.this, ViewListProfesionistActivity.class);
-               // startActivity(intent);
+               Intent intent = new Intent(Services.this, ViewListProfesionistActivity.class);
+               intent.putExtra("Servicio","Estilista");
+               startActivity(intent);
             }
         });
 
