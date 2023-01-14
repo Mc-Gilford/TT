@@ -84,7 +84,13 @@ public class ViewListProfesionistActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mReciclerView.setLayoutManager(linearLayoutManager);
         button = findViewById(R.id.btnSolicitar);
-
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent  intent = new Intent(ViewListProfesionistActivity.this, MapClienteActivity.class);
+                startActivity(intent);
+            }
+        });
         profesionistaProvider = new ProfesionistaProvider();
         ActiveUsersDao activeUsersDao = new ActiveUsersDao();
         Intent intentBefore= getIntent();
@@ -95,14 +101,6 @@ public class ViewListProfesionistActivity extends AppCompatActivity {
             servicio =(String) bundle.get("Servicio");
         }
         System.out.println("Servicio "+servicio);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent  intent = new Intent(ViewListProfesionistActivity.this, MapClienteActivity.class);
-                intent.putExtra("Servicio", servicio);
-                startActivity(intent);
-            }
-        });
         activeUsersDao.getDatabaseReference().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
