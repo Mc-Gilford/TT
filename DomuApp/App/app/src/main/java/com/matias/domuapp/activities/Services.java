@@ -3,12 +3,18 @@ package com.matias.domuapp.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,7 +45,14 @@ public class Services extends AppCompatActivity {
     private ClienteProvider clienteProvider;
     private TextView textView;
     private ImageView mImageViewProfile;
+    private AutoCompleteTextView autoCompleteTextView;
+    private ArrayAdapter<String> adapter;
+    private static final String[] SERVICES = new String[] {
+            "Doctor","Enfermero","Pintor","Plomero","Dibujante",
+            "Disenador","Estilista","Veterinario","Carpintero","Contador"
+    };
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,10 +64,28 @@ public class Services extends AppCompatActivity {
         btnSelectCuidador = findViewById(R.id.btnSelectCuidador);
         mImageViewProfile = findViewById(R.id.imageViewProfile);
         textView = findViewById(R.id.text_view_id);
+        autoCompleteTextView = findViewById(R.id.autocompleteService);
+        adapter = new ArrayAdapter<String>(this,
+                R.layout.item_list_servicios, SERVICES);
+
+        //adapter.setTextColor(Color.parseColor("#999999"));
+        autoCompleteTextView.setAdapter(adapter);
         authProvider = new AuthProvider();
         Cliente cliente = new Cliente();
         clienteProvider = new ClienteProvider();
         System.out.println("Id "+authProvider.getId());
+        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(Services.this,
+                        adapter.getItem(i).toString(),
+                        Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Services.this, ViewListProfesionistActivity.class);
+                intent.putExtra("Servicio",adapter.getItem(i).toString());
+                startActivity(intent);
+
+            }
+        });
         ClientController clientController = new ClientController();
         clientController.getProfileInformation(clienteProvider,authProvider,textView,Services.this,mImageViewProfile,
                 "Bienvenido!\n");
