@@ -66,7 +66,7 @@ public class DetailRequestActivity extends AppCompatActivity implements OnMapRea
 
     private Button mButtonRequest;
     private ProfessionalController professionalController;
-
+    private String servicio;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,7 +92,7 @@ public class DetailRequestActivity extends AppCompatActivity implements OnMapRea
         mButtonRequest = findViewById(R.id.btnRequestNow);
         mCircleImageBack = findViewById(R.id.circleImageBack);
 
-        mTextViewOrigin.setText("Veterinario");
+        mTextViewOrigin.setText(servicio);
         mTextViewDestination.setText(mExtraDestination);
         mButtonRequest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,6 +118,7 @@ public class DetailRequestActivity extends AppCompatActivity implements OnMapRea
         mExtraPrice = getIntent().getStringExtra("price");
         mExtraOrigin = getIntent().getStringExtra("origin");
         mExtraDestination = getIntent().getStringExtra("destino");
+        servicio=getIntent().getStringExtra("Servicio");
     }
 
 

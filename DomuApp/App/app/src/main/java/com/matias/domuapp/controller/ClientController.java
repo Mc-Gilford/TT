@@ -36,7 +36,7 @@ public class ClientController {
         Intent intent = new Intent(context,MainActivity.class);
         context.startActivity(intent);
     }
-    public void requestProfesionist(Context context,LatLng mOriginLatLng, LatLng mDestinationLatLng, String mPrice, String mOrigin, String mDestination) {
+    public void requestProfesionist(Context context,LatLng mOriginLatLng, LatLng mDestinationLatLng, String mPrice, String mOrigin, String mDestination,String servicio) {
         System.out.println("Request Profesionist: "+mOriginLatLng+" "+mDestinationLatLng);
         if (mOriginLatLng != null && mDestinationLatLng != null) {
             Intent intent = new Intent(context, DetailRequestActivity.class);
@@ -47,6 +47,7 @@ public class ClientController {
             intent.putExtra("price", mPrice);
             intent.putExtra("origin", mOrigin);
             intent.putExtra("destino", mDestination);
+            intent.putExtra("Servicio", servicio);
             context.startActivity(intent);
         }
         else {
