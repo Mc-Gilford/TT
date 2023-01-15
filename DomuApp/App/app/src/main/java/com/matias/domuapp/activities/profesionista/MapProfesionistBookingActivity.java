@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -46,6 +47,7 @@ import com.google.android.gms.maps.model.SquareCap;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.matias.domuapp.activities.cliente.MapClientBookingActivity;
 import com.matias.domuapp.controller.TokenController;
 import com.matias.domuapp.controller.UserController;
 import com.matias.domuapp.models.FCMBody;
@@ -220,7 +222,9 @@ public class MapProfesionistBookingActivity extends AppCompatActivity implements
         mButtonFinishBooking.setVisibility(View.VISIBLE);
         mMap.clear();
         mMap.addMarker(new MarkerOptions().position(mDestinationLatLng).title("Ubicación del Servicio").icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_ubicacion)));
-        //drawRoute(mDestinationLatLng);
+
+        mMap.setInfoWindowAdapter(new MapProfesionistBookingActivity.CustomInfoWindowAdapter(LayoutInflater.from(getApplicationContext())));
+//drawRoute(mDestinationLatLng);
         sendNotification("Servicio iniciado");
     }
     private void rutaBooking() {
@@ -230,10 +234,38 @@ public class MapProfesionistBookingActivity extends AppCompatActivity implements
         mButtonStartBooking.setVisibility(View.VISIBLE);
         //mMap.clear();
         mMap.addMarker(new MarkerOptions().position(mDestinationLatLng).title("Ubicación del Servicio").icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_ubicacion)));
+
+        mMap.setInfoWindowAdapter(new MapProfesionistBookingActivity.CustomInfoWindowAdapter(LayoutInflater.from(getApplicationContext())));
         drawRoute(mDestinationLatLng);
         sendNotification("Servicio aceptado");
     }
+    public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
+        private static final String TAG = "CustomInfoWindowAdapter";
+        private LayoutInflater inflater;
+
+        public CustomInfoWindowAdapter(LayoutInflater inflater){
+            this.inflater = inflater;
+        }
+
+        @Override
+        public View getInfoContents(final Marker m) {
+            //Carga layout personalizado.
+            View v = inflater.inflate(R.layout.infowindow_layout, null);
+            String[] info = m.getTitle().split("&");
+            String url = m.getSnippet();
+            ((TextView)v.findViewById(R.id.info_window_nombre)).setText("Jorge Perez");
+            ((TextView)v.findViewById(R.id.info_window_placas)).setText("Datos de mi cliente");
+
+            return v;
+        }
+
+        @Override
+        public View getInfoWindow(Marker m) {
+            return null;
+        }
+
+    }
 
 
 

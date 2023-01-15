@@ -222,7 +222,7 @@ public class MapClientBookingActivity extends AppCompatActivity implements OnMap
                     //getProfesionist(idProfesionist);
                     userController = new UserController();
                     userController.getUser(idProfesionist,"cliente", MapClientBookingActivity.this, mImageViewBooking,
-                            mTextViewClientBooking, mTextViewEmailClientBooking,mTextViewDestinationClientBooking);
+                            mTextViewClientBooking, mTextViewEmailClientBooking,mTextViewDestinationClientBooking );
                     getProfesionistLocation(idProfesionist);
                 }
             }

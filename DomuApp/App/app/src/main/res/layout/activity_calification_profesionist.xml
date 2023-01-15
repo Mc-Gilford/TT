@@ -35,7 +35,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="SERVICIO"
+            android:text="PROFESIONISTA"
             android:textAlignment="center"
             android:textSize="22sp"
             android:textColor="@android:color/white"
@@ -43,6 +43,25 @@
 
         <TextView
             android:id="@+id/textViewOriginCalification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textAlignment="center"
+            android:textSize="17sp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/colorWhite"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SERVICIO"
+            android:textAlignment="center"
+            android:textSize="22sp"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/textViewServicioCalification"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
@@ -75,7 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="20dp" />
 
     </LinearLayout>
 
