@@ -52,7 +52,9 @@ import com.google.android.libraries.places.api.model.RectangularBounds;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.google.maps.android.SphericalUtil;
 import com.matias.domuapp.R;
 import com.matias.domuapp.activities.MainActivity;
@@ -63,6 +65,7 @@ import com.matias.domuapp.controller.UserController;
 import com.matias.domuapp.includes.MyToolbar;
 import com.matias.domuapp.providers.AuthProvider;
 import com.matias.domuapp.providers.GeofireProvider;
+import com.matias.domuapp.providers.ProfesionistaProvider;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -96,7 +99,9 @@ public class MapClienteActivity extends AppCompatActivity implements OnMapReadyC
     private LatLng mDestinationLatLng;
     private TokenController tokenController;
     private GoogleMap.OnCameraIdleListener mCameraListener;
-
+    private LatLng driverLatLng ;
+    private ProfesionistaProvider profesionistaProvider;
+    private String servicio;
 
     LocationCallback mLocationCallback = new LocationCallback() {
         @Override
@@ -151,6 +156,14 @@ public class MapClienteActivity extends AppCompatActivity implements OnMapReadyC
 
         mMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mMapFragment.getMapAsync(this);
+
+        Intent intentBefore= getIntent();
+        Bundle bundle = intentBefore.getExtras();
+        if(bundle!=null)
+        {
+            servicio =(String) bundle.get("Servicio");
+        }
+
         mButtonRequestProfesionist = findViewById(R.id.btnRequestProfesionist);
         if (!Places.isInitialized()) { //AIzaSyColM7tqEOPJre54InK5gj0wFIk7DVJku0
             Places.initialize(getApplicationContext(), "AIzaSyAWZmeSv-qeL_jUoDDVLtzTlLWlyCMwUzU");
@@ -163,7 +176,7 @@ public class MapClienteActivity extends AppCompatActivity implements OnMapReadyC
             @Override
             public void onClick(View view) {
                 //requestProfesionist();
-                clientController.requestProfesionist(MapClienteActivity.this,mOriginLatLng, mDestinationLatLng, mPrice, mOrigin,mDestination);
+                clientController.requestProfesionist(MapClienteActivity.this,mOriginLatLng, mDestinationLatLng, mPrice, mOrigin,mDestination,servicio);
             }
         });
         tokenController = new TokenController(mAuthProvider.getId());
@@ -348,12 +361,32 @@ public class MapClienteActivity extends AppCompatActivity implements OnMapReadyC
                         }
                     }
                 }
+                driverLatLng = new LatLng(location.latitude, location.longitude);
+                profesionistaProvider = new ProfesionistaProvider();
+                profesionistaProvider.getProfesionist(key).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            String obtainedService=dataSnapshot.child("servicio").getValue().toString();
+                            if(obtainedService.compareTo(servicio)==0 && obtainedService.compareTo("Veterinario")==0){
+                                Marker marker = mMap.addMarker(new MarkerOptions().position(driverLatLng).title("Veterinario disponible").icon(BitmapDescriptorFactory.fromResource(R.drawable.veterinario_icon)));
+                                //mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(LayoutInflater.from(getApplicationContext())));
+                                marker.setTag(dataSnapshot.child("id").getValue().toString());
+                                mProfesionistMarkers.add(marker);
+                            } else if (obtainedService.compareTo(servicio)==0 && obtainedService.compareTo("Estilista")==0){
+                                Marker marker = mMap.addMarker(new MarkerOptions().position(driverLatLng).title("Estilista disponible").icon(BitmapDescriptorFactory.fromResource(R.drawable.estilista)));
+                                //mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(LayoutInflater.from(getApplicationContext())));
+                                marker.setTag(dataSnapshot.child("id").getValue().toString());
+                                mProfesionistMarkers.add(marker);
+                            }
+                        }
+                    }
 
-                LatLng driverLatLng = new LatLng(location.latitude, location.longitude);
-                Marker marker = mMap.addMarker(new MarkerOptions().position(driverLatLng).title("Profesionista disponible").icon(BitmapDescriptorFactory.fromResource(R.drawable.veterinario_icon)));
-                //mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(LayoutInflater.from(getApplicationContext())));
-                marker.setTag(key);
-                mProfesionistMarkers.add(marker);
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
 
             @Override
