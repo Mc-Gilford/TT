@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,12 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.matias.domuapp.R;
 import com.matias.domuapp.activities.cliente.HistoryBookingDetailClientActivity;
+import com.matias.domuapp.activities.cliente.MapClienteActivity;
+import com.matias.domuapp.activities.cliente.ServiciosProfesionistaActivity;
 import com.matias.domuapp.activities.profesionista.HistoryBookingDetailProfesionistActivity;
 import com.matias.domuapp.activities.profesionista.HistoryBookingProfesionistActivity;
 import com.matias.domuapp.models.Profesional;
 import com.matias.domuapp.providers.ProfesionistaProvider;
 import com.squareup.picasso.Picasso;
-
+import com.matias.domuapp.activities.cliente.MapClienteActivity;
 import java.util.ArrayList;
 
 public class ProfesionistasActiveAdapter extends RecyclerView.Adapter<ProfesionistasActiveAdapter.ViewHolder> {
@@ -59,6 +62,8 @@ public class ProfesionistasActiveAdapter extends RecyclerView.Adapter<Profesioni
         private TextView textViewCalification;
         private ImageView imageViewHistoryBooking;
         private View mView;
+        private Button button;
+        private Button btnServicios;
 
         public ViewHolder(View view) {
             super(view);
@@ -68,6 +73,8 @@ public class ProfesionistasActiveAdapter extends RecyclerView.Adapter<Profesioni
             textViewDestination = view.findViewById(R.id.textViewDestination);
             textViewCalification = view.findViewById(R.id.textViewCalification);
             imageViewHistoryBooking = view.findViewById(R.id.imageViewHistoryBooking);
+            button = view.findViewById(R.id.btnSolicitar);
+            btnServicios = view.findViewById(R.id.btnServicios);
         }
 
 
@@ -84,6 +91,23 @@ public class ProfesionistasActiveAdapter extends RecyclerView.Adapter<Profesioni
                     Intent intent = new Intent(mContext, HistoryBookingProfesionistActivity.class);
                     System.out.println("Profesional information "+profesional.getId());
                     intent.putExtra("idProfesionista", profesional.getId());
+                    mContext.startActivity(intent);
+                }
+            });
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, MapClienteActivity.class);
+                    String servicio = profesional.getServicio().toString();
+                    intent.putExtra("Servicio",servicio);
+                    mContext.startActivity(intent);
+                }
+            });
+            btnServicios.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, ServiciosProfesionistaActivity.class);
+                    intent.putExtra("id",profesional.getId());
                     mContext.startActivity(intent);
                 }
             });

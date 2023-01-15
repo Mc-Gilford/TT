@@ -17,17 +17,6 @@
         android:textColor="@color/colorWhite"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="220dp"/>
-    <Button
-        android:id="@+id/btnServicios"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:text="Servicios"
-        android:background="@drawable/rounded_button"
-        android:backgroundTint="@color/colorSecondary"
-        android:textColor="@color/colorWhite"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="185dp"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -69,17 +58,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Profesion:"
+                android:text="Nombre de Servicio:"
                 android:textColor="@color/quantum_lightblue"
                 android:textSize="15sp"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="15dp" />
 
             <TextView
-                android:id="@+id/textViewOrigin"
+                android:id="@+id/textViewNameService"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Avenida falsa con calle falsa"
+                android:text="Nombre servicio"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:layout_marginTop="5dp"
@@ -89,17 +78,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Destino:"
+                android:text="Detalle:"
                 android:textColor="@color/quantum_lightblue"
                 android:textSize="15sp"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="15dp" />
 
             <TextView
-                android:id="@+id/textViewDestination"
+                android:id="@+id/textViewDetalle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Avenida falsa con calle falsa"
+                android:text="Detalles"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:layout_marginTop="5dp"
@@ -109,35 +98,22 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Calificacion obtenida:"
+                android:text="Costo:"
                 android:textColor="@color/quantum_lightblue"
                 android:textSize="15sp"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="15dp" />
 
             <TextView
-                android:id="@+id/textViewCalification"
+                android:id="@+id/textViewCosto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0"
+                android:text="Costo"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="15dp"
                 android:maxLines="1"/>
-            <Button
-                android:id="@+id/btnCancelRequest"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Solicitar"
-                android:background="@drawable/rounded_button"
-                android:backgroundTint="@color/colorRed"
-                android:textColor="@color/colorWhite"
-                android:layout_marginLeft="220dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"/>
-
-
         </LinearLayout>
 
 
